@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/small_padding"
+    tools:context=".SplashActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="6"
+            android:src="@mipmap/logo"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="@string/slogan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="70dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/enter"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button"
+            app:layout_constraintBottom_toTopOf="@id/privacy_2"
+            android:layout_above="@id/privacy_2"
+            android:layout_centerInParent="true"
+            android:text="进入" />
+
+        <LinearLayout
+            android:id="@+id/privacy_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/agree_privacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:style="@style/Widget.AppCompat.CompoundButton.RadioButton" />
+
+            <TextView
+                android:id="@+id/privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:text="已同意用户协议与隐私条例" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/developer_info"
+        android:layout_gravity="bottom|end"/>
+
+
+</LinearLayout>
