@@ -2,5 +2,7 @@
     <string name="app_name">永动鸡</string>
     <string name="slogan">摆脱拖延，一起动起来</string>
     <string name="developer_info">版本1.0 开发团队</string>
-    <string name="privacy_policy">用户协议和隐私条款...</string>
+    <string name="privacy_policy">用户协议和隐私条款...TODO!!</string>
+    <string name="privacy_policy_agreed">已同意<u>用户协议与隐私条例</u></string>
+    <string name="saved_agreed_key">已保存</string>
 </resources>
