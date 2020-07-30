@@ -72,7 +72,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                     //把“已确认”存入SP
                     SharedPreferences.Editor editor = SplashActivitySP.edit();
                     editor.putInt(getString(R.string.saved_agreed_key), 1);
-                    editor.commit();
+                    editor.apply();
                     //启动活动
                     Intent intent = new Intent(SplashActivity.this,MainActivity.class);
                     startActivity(intent);
