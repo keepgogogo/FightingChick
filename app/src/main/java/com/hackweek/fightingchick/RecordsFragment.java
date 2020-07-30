@@ -21,7 +21,7 @@ public class RecordsFragment extends Fragment {
 
     RecordsAdapter recordsAdapter;
     ViewPager2 viewPager;
-    private final String[] tabLabels = {"我的小鸡","活动统计","光荣录&忏悔录"};
+    private final String[] tabLabels = {"我的小鸡","活动统计","忏悔录&光荣录"};
 
     public RecordsFragment() {
         // Required empty public constructor
