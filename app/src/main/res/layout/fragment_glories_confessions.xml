@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/small_padding"
+    android:orientation="vertical"
+    android:padding="@dimen/big_padding"
+    tools:context=".GloriesConfessionsFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/small_padding"
+        android:text="忏悔录"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/save_confessions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="left|bottom"/>
+        
+        <EditText
+            android:id="@+id/edit_confessions"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="记录你堕落的悔恨与反思"
+            android:gravity="start"/>
+
+        <TextView
+            android:id="@+id/add_confessions_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:layout_gravity="end|bottom"
+            android:text="@string/add_notification"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/small_padding"
+        android:text="光荣录"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/save_glories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="left|bottom"/>
+
+        <EditText
+            android:id="@+id/edit_glories"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:hint="记录你有成就感的事情和想法"
+            android:gravity="start"/>
+
+        <TextView
+            android:id="@+id/add_glories_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:layout_gravity="end|bottom"
+            android:text="@string/add_notification"/>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

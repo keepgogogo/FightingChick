@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="@dimen/small_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/top_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="昵称"/>
+
+    <TextView
+        android:id="@+id/top_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_padding"
+        android:text="日期"/>
+    <TextView
+        android:id="@+id/top_resolutions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_padding"
+        android:text="永动宣言"/>
+
+
+</LinearLayout>
