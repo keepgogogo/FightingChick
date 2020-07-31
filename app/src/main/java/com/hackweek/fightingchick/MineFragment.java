@@ -14,8 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hackweek.fightingchick.database.FocusListDataBase;
+import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
+
 
 public class MineFragment extends Fragment implements View.OnClickListener {
+
+    final int TRANSFER_DATABASE_TO_MINE_FRAGMENT=566;
 
     SharedPreferences preferences;
     TextView nickNameTextView;
@@ -24,10 +29,46 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     Button buttonForWatchGloryAndConfessions;
     Button buttonForWatchAboutUs;
 
+    FocusListDataBase focusListDataBase;
+    GloryAndConfessionDataBase gloryAndConfessionDataBase;
+
+    /**
+     * 以下为fragment向MainActivity传递信息模块
+     */
+    onFragmentSetListener callBack;
+
+    public void setOnFragmentSetListener(onFragmentSetListener callback)
+    {
+        callBack=callback;
+    }
+
+    public interface onFragmentSetListener
+    {
+
+    }
+
+
+    /**
+     * 以上为fragment向MainActivity传递信息模块
+     */
+
+
+
+
+
+
+
+
+
     public MineFragment() {
         // Required empty public constructor
     }
 
+    public void setBothDataBase(FocusListDataBase focusListDataBase,GloryAndConfessionDataBase gloryAndConfessionDataBase)
+    {
+        this.focusListDataBase=focusListDataBase;
+        this.gloryAndConfessionDataBase=gloryAndConfessionDataBase;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,25 +94,26 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         fightingForeverSloganTextView.setText(preferences.getString("FightForeverSlogan","永动宣言"));
 
 
+
         return view;
     }
 
     @Override
     public void onClick(View view) {
+        MainActivity mainActivity=new MainActivity();
         switch (view.getId())
         {
             case R.id.ButtonForChangePersonalDocument:
                 //编辑个人资料点击事件
-                MainActivity mainActivity=new MainActivity();
                 mainActivity.setFragment(new EditPersonalDocumentFragment());
                 break;
             case R.id.ButtonForWatchAboutUsInMineFragment:
                 //关于我们点击事件
-
+                mainActivity.setFragment(new AboutUsFragment());
                 break;
             case R.id.ButtonForWatchGloryAndConfessionInMineFragment:
                 //查看光荣录和忏悔录点击事件
-
+                mainActivity.setFragment(new AllGloryAndConfessionFragment());
                 break;
             default:
                 break;

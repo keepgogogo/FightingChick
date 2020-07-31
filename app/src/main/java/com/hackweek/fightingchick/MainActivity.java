@@ -7,20 +7,31 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hackweek.fightingchick.database.FocusListDataBase;
+import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 public class MainActivity extends AppCompatActivity {
+
+    final int TRANSFER_DATABASE_TO_MINE_FRAGMENT=566;
 
     private BottomNavigationView mBottomNavigationView;
     private int lastIndex;
     List<Fragment> mFragments;
+    FocusListDataBase focusListDataBase;
+    GloryAndConfessionDataBase gloryAndConfessionDataBase;
 
     //private NavController navController;
     @Override
@@ -29,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initBottomNavigation();
         initData();
+
+        focusListDataBase= Room.databaseBuilder(getApplicationContext(), FocusListDataBase.class,
+                "FocusDataBase").build();
+        gloryAndConfessionDataBase=Room.databaseBuilder(getApplicationContext(),GloryAndConfessionDataBase.class,
+                "GloryAndConfessionDataBase").build();
         //setupViews();
     }
 
@@ -93,6 +109,34 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController((BottomNavigationView) findViewById(R.id.bottomNavView),navHostFragment.getNavController());
     }
      **/
+
+    public class MainActivityHandler extends Handler
+    {
+
+        @Override
+        public void handleMessage(@Nonnull Message message)
+        {
+            switch (message.what)
+            {
+                case TRANSFER_DATABASE_TO_MINE_FRAGMENT:
+                    MineFragment mineFragment=(MineFragment)getSupportFragmentManager()
+                            .findFragmentById(R.id.mineFragment);
+                    if(mineFragment!=null)
+                    {
+                        mineFragment.setBothDataBase(focusListDataBase,gloryAndConfessionDataBase);
+                    }
+                    else
+                    {
+                        MineFragment newFragment=new MineFragment();
+                        setFragment(newFragment);
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    }
 
 
 
