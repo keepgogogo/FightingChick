@@ -16,7 +16,7 @@ public interface FocusListDao {
     List<FocusList> loadAll();
 
     @Delete
-    List<FocusList> delete(FocusList ... focusLists);
+    void delete(FocusList ... focusLists);
 
     @Query("SELECT * FROM focuslist WHERE date = :date")
     List<FocusList> getByDate(int date);

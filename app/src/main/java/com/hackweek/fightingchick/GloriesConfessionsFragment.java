@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,8 +25,8 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
     private TextView notificationGlories;
     private EditText editGlories;
     private EditText editConfessions;
-    private MaterialButton saveGlories;
-    private MaterialButton saveConfessions;
+    private Button saveGlories;
+    private Button saveConfessions;
     private SharedPreferences gloriesConfessionsSp;
     private SharedPreferences.Editor gloriesConfessionsSpEditor;
     private String content;
@@ -51,14 +52,15 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         notificationConfessions = (TextView) view.findViewById(R.id.add_confessions_notification);
         notificationGlories = (TextView) view.findViewById(R.id.add_glories_notification);
-        saveGlories = (MaterialButton) view.findViewById(R.id.save_glories);
-        saveConfessions = (MaterialButton) view.findViewById(R.id.save_confessions);
+        saveGlories = (Button) view.findViewById(R.id.save_glories);
+        saveConfessions = (Button) view.findViewById(R.id.save_confessions);
         editConfessions = (EditText) view.findViewById(R.id.edit_confessions);
         editGlories = (EditText) view.findViewById(R.id.edit_glories);
         notificationGlories.setOnClickListener(this);
         notificationConfessions.setOnClickListener(this);
         saveGlories.setOnClickListener(this);
         saveConfessions.setOnClickListener(this);
+        //init SP
         gloriesConfessionsSp = getActivity().getPreferences(Context.MODE_PRIVATE);
         gloriesConfessionsSpEditor = gloriesConfessionsSp.edit();
 
@@ -66,14 +68,29 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
+            //保存忏悔录到Room
             case R.id.save_confessions:
-                Toast.makeText(getContext(), "已保存", Toast.LENGTH_SHORT).show();
+                content = editConfessions.getText().toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    Toast.makeText(getContext(), "内容不能为空！", Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO
+                    Toast.makeText(getContext(), "已保存", Toast.LENGTH_SHORT).show();
+                }
                 break;
+            //保存光荣录到Room
             case R.id.save_glories:
-                Toast.makeText(getContext(), "已保存", Toast.LENGTH_SHORT).show();
+                content = editGlories.getText().toString().trim();
+                if (TextUtils.isEmpty(content)) {
+                    Toast.makeText(getContext(), "内容不能为空！", Toast.LENGTH_SHORT).show();
+                } else {
+                    //TODO
+                    Toast.makeText(getContext(), "已保存", Toast.LENGTH_SHORT).show();
+                }
                 break;
-            //保存忏悔录到闹钟提示界面
+            //保存忏悔录到sp
             case R.id.add_confessions_notification:
                 content = editConfessions.getText().toString().trim();
                 if (TextUtils.isEmpty(content)) {
@@ -84,7 +101,7 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
                     Toast.makeText(getContext(), "已应用到闹钟提示界面", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            //保存光荣录到闹钟提示界面
+            //保存光荣录到sp
             case R.id.add_glories_notification:
                 content = editConfessions.getText().toString().trim();
                 if (TextUtils.isEmpty(content)) {
@@ -97,4 +114,6 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
                 break;
         }
     }
+
+
 }

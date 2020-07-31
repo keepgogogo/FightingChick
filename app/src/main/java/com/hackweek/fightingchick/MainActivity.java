@@ -64,15 +64,23 @@ public class MainActivity extends AppCompatActivity {
         setFragmentPosition(0);
     }
 
-    private void setFragmentPosition(int position) {
+    //用来操作子碎片
+    public void setFragment(Fragment fragment){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frame_for_fragment,fragment).commit();
+    }
+
+    //用来自动操作主要的3个碎片
+    public void setFragmentPosition(int position) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment currentFragment = mFragments.get(position);
         Fragment lastFragment = mFragments.get(lastIndex);
         lastIndex = position;
-        ft.hide(lastFragment);
+        if(lastFragment.isVisible())
+            ft.hide(lastFragment);
         if (!currentFragment.isAdded()) {
-            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
-            ft.add(R.id.frame_for_fragment, currentFragment);
+            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();//只保留一份该碎片的实例
+            ft.replace(R.id.frame_for_fragment, currentFragment);
         }
         ft.show(currentFragment);
         ft.commitAllowingStateLoss();

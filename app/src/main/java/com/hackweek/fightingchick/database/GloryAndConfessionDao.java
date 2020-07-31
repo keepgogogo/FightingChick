@@ -22,6 +22,6 @@ public interface GloryAndConfessionDao {
     @Delete
     void delete(GloryAndConfessionRecord ... gloryAndConfessionRecords);
 
-    @Query("UPDATE gloryandconfessionrecord SET content =:newContent WHERE date = :date and content :originContent")
+    @Query("UPDATE gloryandconfessionrecord SET content =:newContent WHERE date = :date and content =:originContent")
     void update(String newContent,int date,String originContent);
 }
