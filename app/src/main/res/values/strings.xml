@@ -13,4 +13,6 @@
     <string name="energy_key">动力值</string>
     <string name="glories_to_show_key">应用到提示界面的光荣录</string>
     <string name="confessions_to_show_key">应用到提示界面的忏悔录</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
