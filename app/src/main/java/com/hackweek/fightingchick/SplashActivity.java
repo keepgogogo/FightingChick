@@ -38,7 +38,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         if(!SplashActivitySP.contains(getString(R.string.saved_agreed_key))){
             SharedPreferences.Editor editor = SplashActivitySP.edit();
             editor.putInt(getString(R.string.saved_agreed_key), 0);
-            editor.commit();
+            editor.apply();
         }
 
         if(SplashActivitySP.getInt(getString(R.string.saved_agreed_key),0)==1){
