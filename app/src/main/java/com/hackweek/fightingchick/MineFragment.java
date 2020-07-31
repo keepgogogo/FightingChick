@@ -1,5 +1,7 @@
 package com.hackweek.fightingchick;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 public class MineFragment extends Fragment implements View.OnClickListener {
 
+    SharedPreferences preferences;
     TextView nickNameTextView;
     TextView fightingForeverSloganTextView;
     Button buttonForSetPersonalStatics;
@@ -43,6 +46,11 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         buttonForWatchAboutUs=(Button)view.findViewById(R.id.ButtonForWatchAboutUsInMineFragment);
         buttonForWatchGloryAndConfessions=(Button)view.findViewById(R.id.ButtonForWatchGloryAndConfessionInMineFragment);
 
+        MainActivity mainActivity=new MainActivity();
+        preferences=mainActivity.getSharedPreferences("PersonalDocument", Context.MODE_PRIVATE);
+
+        nickNameTextView.setText(preferences.getString("NickName","昵称"));
+        fightingForeverSloganTextView.setText(preferences.getString("FightForeverSlogan","永动宣言"));
 
 
         return view;
