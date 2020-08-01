@@ -19,17 +19,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView mBottomNavigationView;
-    private int lastIndex;
-    List<Fragment> mFragments;
-
-    //private NavController navController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initBottomNavigation();
-        initData();
-        //setupViews();
+        Fragment todoListFragment = new TodoListFragment();
+        setFragment(todoListFragment);
     }
 
     public void initBottomNavigation() {
@@ -39,13 +35,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.todoListFragment:
-                        setFragmentPosition(0);
+                        Fragment todoListFragment = new TodoListFragment();
+                        setFragment(todoListFragment);
+                        //setFragmentPosition(0);
                         break;
                     case R.id.recordsFragment:
-                        setFragmentPosition(1);
+                        Fragment recordsFragment = new RecordsFragment();
+                        setFragment(recordsFragment);
+                        //setFragmentPosition(1);
                         break;
                     case R.id.mineFragment:
-                        setFragmentPosition(2);
+                        Fragment mineFragment = new MineFragment();
+                        setFragment(mineFragment);
+                        //setFragmentPosition(2);
                         break;
                     default:
                         break;
@@ -55,38 +57,31 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void initData() {
-        mFragments = new ArrayList<>();
-        mFragments.add(new TodoListFragment());
-        mFragments.add(new RecordsFragment());
-        mFragments.add(new MineFragment());
-        // 初始化展示TodoListFragment
-        setFragmentPosition(0);
-    }
 
-    //用来操作子碎片
+
+    //用来操作碎片
     public void setFragment(Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_for_fragment,fragment).commit();
     }
 
-    //用来自动操作主要的3个碎片
+    /**看不懂的废弃方法
     public void setFragmentPosition(int position) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment currentFragment = mFragments.get(position);
         Fragment lastFragment = mFragments.get(lastIndex);
         lastIndex = position;
-        if(lastFragment.isVisible())
-            ft.hide(lastFragment);
+        //if(lastFragment.isVisible())
+            //ft.hide(lastFragment);
         if (!currentFragment.isAdded()) {
             getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();//只保留一份该碎片的实例
-            ft.replace(R.id.frame_for_fragment, currentFragment);
+            //ft.replace(R.id.frame_for_fragment, currentFragment);
         }
-        ft.show(currentFragment);
+        ft.replace(R.id.frame_for_fragment, currentFragment);
+        //ft.show(currentFragment);
         ft.commitAllowingStateLoss();
     }
 
-    /**
     private void setupViews(){
         NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.fragNavHost);
         navController = navHostFragment.getNavController();
