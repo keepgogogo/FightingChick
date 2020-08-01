@@ -45,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/cardview_shadow_end_color"
+            android:textColor="#000"
             android:layout_marginTop="1dp"
             android:text="编辑个人资料"
             android:textSize="20sp"/>
@@ -55,7 +56,8 @@
             android:layout_marginLeft="45dp"
             android:layout_marginTop="20dp"
             android:text="忏悔录和光荣录的记录"
-            android:background="#ffff"
+            android:textColor="#000"
+            android:background="@android:color/transparent"
             android:textSize="20sp"
             android:id="@+id/ButtonForWatchGloryAndConfessionInMineFragment"
             />
@@ -66,7 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="43dp"
             android:layout_marginTop="20dp"
-            android:background="#ffff"
+            android:background="@android:color/transparent"
+            android:textColor="#000"
             android:text="关于我们"
             android:textSize="20sp" />
 
