@@ -21,9 +21,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 
 
-public class AddTaskFragment extends Fragment implements View.OnClickListener{
+public class AddTaskFragment extends Fragment implements View.OnClickListener,RadioGroup.OnCheckedChangeListener{
 
     private Button cancelAddTask;
     private TimePicker timePicker;
@@ -31,8 +32,12 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener{
     private CheckBox checkBoxVibrate;
     private CheckBox checkBoxRing;
     private RadioGroup chooseRing;
+    private MaterialRadioButton radioMildRing;
+    private MaterialRadioButton radioCrazyRing;
+    private MaterialRadioButton radioHappyRing;
+    private MaterialRadioButton radioScreamRing;
     private RadioGroup chooseInterval;
-    private LinearLayout customIntervalLayout;
+    private MaterialRadioButton radioIntervalCustom;
     private EditText editNewTaskInterval;
     private TextView editInervalText;
     private Button saveNewTask;
@@ -52,27 +57,47 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener{
         editNewTask= (EditText)view.findViewById(R.id.edit_new_task);
         checkBoxVibrate = (CheckBox)view.findViewById(R.id.checkbox_vibrate);
         checkBoxRing = (CheckBox)view.findViewById(R.id.checkbox_ring);
+        checkBoxRing.setOnClickListener(this);
+        // choose ring
         chooseRing = (RadioGroup)view.findViewById(R.id.choose_ring);
+        radioCrazyRing = (MaterialRadioButton)view.findViewById(R.id.radio_crazy_ring);
+        radioMildRing = (MaterialRadioButton)view.findViewById(R.id.radio_mild_ring);
+        radioHappyRing = (MaterialRadioButton)view.findViewById(R.id.radio_happy_ring);
+        radioScreamRing = (MaterialRadioButton) view.findViewById(R.id.radio_scream_ring);
+        // Interval
         chooseInterval = (RadioGroup)view.findViewById(R.id.choose_interval);
-        chooseRing.setOnClickListener(this);
-        customIntervalLayout = (LinearLayout)view.findViewById(R.id.interval_custom_layout);
+        chooseInterval.setOnCheckedChangeListener(this);
+        radioIntervalCustom = (MaterialRadioButton)view.findViewById(R.id.radio_interval_custom);
         editNewTaskInterval = (EditText)view.findViewById(R.id.edit_new_task_interval);
-
+        editInervalText = (TextView)view.findViewById(R.id.edit_interval_text);
+        // save task
         saveNewTask = (Button)view.findViewById(R.id.save_new_task);
         saveNewTask.setOnClickListener(this);
-
     }
 
-    private void onRadioButtonClicked(View view){
-        switch(view.getId()){
-            case R.id.interval_custom:
-                if(chooseInterval.getCheckedRadioButtonId()==R.id.interval_custom){
-                    customIntervalLayout.setVisibility(View.VISIBLE);
-                }
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        switch (i){
+            // 选择自定义响铃间隔
+            case R.id.radio_interval_custom:
+                editNewTaskInterval.setVisibility(View.VISIBLE);
+                editInervalText.setVisibility(View.VISIBLE);
                 break;
-
+            //选择其它时间间隔，隐藏两个控件
+            case R.id.radio_interval_3min:
+            case R.id.radio_interval_5min:
+            case R.id.radio_interval_10min:
+                hideCustomView();
+                break;
         }
     }
+
+    //隐藏自定义响铃间隔的两个控件
+    private void hideCustomView(){
+        editNewTaskInterval.setVisibility(View.GONE);
+        editInervalText.setVisibility(View.GONE);
+    }
+
 
     //根据checkbox判断
     private int getNoticeMethod(){
@@ -97,11 +122,17 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.checkbox_ring:
                 //动态展示选择铃声界面
-                if(checkBoxRing.isChecked()){
-                    chooseRing.setVisibility(View.INVISIBLE);
+                if(! checkBoxRing.isChecked()){
+                    radioScreamRing.setVisibility(View.INVISIBLE);
+                    radioHappyRing.setVisibility(View.INVISIBLE);
+                    radioMildRing.setVisibility(View.INVISIBLE);
+                    radioCrazyRing.setVisibility(View.INVISIBLE);
                     chooseRing.setClickable(false);
                 }else{
-                    chooseRing.setVisibility(View.VISIBLE);
+                    radioCrazyRing.setVisibility(View.VISIBLE);
+                    radioMildRing.setVisibility(View.VISIBLE);
+                    radioScreamRing.setVisibility(View.VISIBLE);
+                    radioHappyRing.setVisibility(View.VISIBLE);
                     chooseRing.setClickable(true);
                 }
                 break;
@@ -122,7 +153,6 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener{
                 newMinute = timePicker.getMinute();
                 newInterval = chooseInterval.getCheckedRadioButtonId();
                 break;
-
 
         }
     }

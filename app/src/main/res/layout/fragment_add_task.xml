@@ -35,16 +35,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:text="任务名"/>
         <EditText
             android:id="@+id/edit_new_task"
-            android:layout_width="140dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:text="提醒方式"/>
     <CheckBox
         android:id="@+id/checkbox_vibrate"
@@ -59,87 +61,93 @@
         style="@style/Widget.AppCompat.CompoundButton.RadioButton"
         android:text="响铃"/>
     <RadioGroup
+        android:layout_marginLeft="@dimen/big_padding"
         android:id="@+id/choose_ring"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
         android:orientation="vertical"
-        android:checkedButton="@+id/button_mild_ring">
+        android:checkedButton="@+id/radio_mild_ring">
 
-        <RadioButton
-            android:id="@id/button_mild_ring"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@id/radio_mild_ring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:text="温和鸡"/>
-        <RadioButton
-            android:id="@+id/button_crazy_ring"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_crazy_ring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:text="暴躁鸡"/>
-        <RadioButton
-            android:id="@+id/button_happy_ring"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_happy_ring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:text="快乐鸡"/>
-        <RadioButton
-            android:id="@+id/button_scream_ring"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_scream_ring"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="invisible"
             android:text="尖叫鸡"/>
     </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:text="响铃间隔"/>
 
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/choose_interval"
-        android:checkedButton="@+id/interval_3min"
+        android:checkedButton="@+id/radio_interval_3min"
         android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@id/interval_3min"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@id/radio_interval_3min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3分钟"/>
 
-        <RadioButton
-            android:id="@+id/interval_5min"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_interval_5min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="5分钟"/>
-        <RadioButton
-            android:id="@+id/interval_10min"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_interval_10min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10分钟"/>
 
-        <RadioButton
-            android:id="@+id/interval_custom"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_interval_custom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="自定义"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:visibility="invisible">
+            android:gravity="center_vertical">
             <EditText
                 android:id="@+id/edit_new_task_interval"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:maxLength="2"
+                android:visibility="gone"
                 android:inputType="number"/>
 
             <TextView
                 android:id="@+id/edit_interval_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:gravity="bottom"
                 android:text="分钟"/>
         </LinearLayout>
