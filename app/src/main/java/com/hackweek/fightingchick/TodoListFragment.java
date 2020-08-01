@@ -1,5 +1,7 @@
 package com.hackweek.fightingchick;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class TodoListFragment extends Fragment {
     private static final String TAG = "TodoListFragment";
@@ -22,6 +27,8 @@ public class TodoListFragment extends Fragment {
     private TextView dateTextView;
     private TextView nickNameTextView;
     private TextView resolutionsTextView;
+    private SharedPreferences todoListSp;
+    private SharedPreferences.Editor todoListSpEditor;
 
 
     public TodoListFragment() {
@@ -57,6 +64,16 @@ public class TodoListFragment extends Fragment {
                 activity.setFragment(addTaskFragment);
             }
         });
+        // init sp
+        todoListSp = getActivity().getPreferences(Context.MODE_PRIVATE);
+        todoListSpEditor = todoListSp.edit();
+        //init top view
+        nickNameTextView.setText(todoListSp.getString(getString(R.string.nickname_key),"昵称"));
+        resolutionsTextView.setText(todoListSp.getString(getString(R.string.resolutions_key),"永动宣言"));
+        // set date
+        Date today = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("MM'月'dd'日'");
+        dateTextView.setText(ft.format(today));
     }
 
     @Override

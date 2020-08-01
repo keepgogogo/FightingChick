@@ -9,6 +9,7 @@
     tools:context=".GloriesConfessionsFragment">
 
     <TextView
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/small_padding"
@@ -44,6 +45,7 @@
     </FrameLayout>
 
     <TextView
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/small_padding"
