@@ -34,6 +34,7 @@ import com.yanzhenjie.recyclerview.SwipeRecyclerView;
 import com.yanzhenjie.recyclerview.widget.DefaultItemDecoration;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AllGloryAndConfessionFragment extends Fragment implements View.OnClickListener{
 
@@ -47,19 +48,21 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
     DefaultItemDecoration itemDecoration;
     ProgressBar progressBar;
     List<GloryAndConfessionRecord> recordsCopy;
+    FragmentHandler handler;
 
     private SwipeRecyclerView swipeRecyclerView;
     private GloryAndConfessionAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private GloryAndConfessionViewModel viewModel;
     private Button buttonForGlory;
+    private Button buttonForBack;
     private Button buttonForConfession;
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
-        mainActivity=new MainActivity();
+        mainActivity=(MainActivity)getActivity();
         focusListDataBase=FocusListDataBase.getDatabase(mainActivity);
         gloryAndConfessionDataBase=GloryAndConfessionDataBase.getDataBase(mainActivity);
         gloryAndConfessionDao=gloryAndConfessionDataBase.GloryAndConfessionDao();
@@ -71,6 +74,8 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
         buttonForGlory.setOnClickListener(this);
         buttonForConfession=view.findViewById(R.id.ButtonForWatchGloryInAllGloryFragment);
         buttonForConfession.setOnClickListener(this);
+        buttonForBack=view.findViewById(R.id.ButtonForGetBackInAllGloryFragment);
+        buttonForBack.setOnClickListener(this);
 
         layoutManager=new LinearLayoutManager(getContext());
         swipeRecyclerView=(SwipeRecyclerView)view.findViewById(R.id.recyclerAllGlory);
@@ -79,6 +84,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
 
         viewModel=new ViewModelProvider(this).get(GloryAndConfessionViewModel.class);
         adapter=new GloryAndConfessionAdapter();
+        handler=new FragmentHandler();
 
         final Observer<List<GloryAndConfessionRecord>> GloryAndConfessionObserver= new Observer<List<GloryAndConfessionRecord>>() {
             @Override
@@ -101,7 +107,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                     Message message=new Message();
                     message.what=WRITE_GLORY_OR_CONFESSION_FOR_ALARM;
                     message.obj=record.gloryOrConfession;
-                    FragmentHandler handler=new FragmentHandler();
+//                    FragmentHandler handler=new FragmentHandler();
                     handler.sendMessage(message);
                 }
             }
@@ -139,7 +145,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                 message.what=UPDATE_UI;
                 message.obj=records;
 
-                FragmentHandler handler=new FragmentHandler();
+//                FragmentHandler handler=new FragmentHandler();
                 handler.sendMessage(message);
             }
         }).start();
@@ -153,18 +159,21 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
         switch (view.getId())
         {
             case R.id.ButtonForWatchGloryInAllGloryFragment:
-                buttonForGlory.setTextColor(0x000000);
-                buttonForConfession.setTextColor(0xbfb0b0);
+                buttonForConfession.setTextColor(0xff000000);
+                buttonForGlory.setTextColor(0xffbfb0b0);
                 temp=operator.getGloryRecord();
                 adapter.setMData(temp);
                 setView(temp);
                 break;
             case R.id.ButtonForWatchConfessionInAllGloryFragment:
-                buttonForConfession.setTextColor(0x000000);
-                buttonForGlory.setTextColor(0xbfb0b0);
+                buttonForGlory.setTextColor(0xff000000);
+                buttonForConfession.setTextColor(0xffbfb0b0);
                 temp=operator.getConfessionRecord();
                 adapter.setMData(temp);
                 setView(temp);
+                break;
+            case R.id.ButtonForGetBackInAllGloryFragment:
+                mainActivity.setFragment(new MineFragment());
                 break;
             default:
                 break;
@@ -173,7 +182,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
         }
     }
 
-    private class FragmentHandler extends Handler{
+    public class FragmentHandler extends Handler{
 
         @Override
         public void handleMessage(Message message)
@@ -183,11 +192,12 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                 case UPDATE_UI:
                     List<GloryAndConfessionRecord> records=(List<GloryAndConfessionRecord>)message.obj;
                     recordsCopy=records;
-                    buttonForGlory.setTextColor(0x000000);
+                    //buttonForGlory.setTextColor(0xffbfb0b0);
                     GloryAndConfessionRecordsOperator operator=new GloryAndConfessionRecordsOperator();
+                    operator.setRecords(records);
                     records=operator.getGloryRecord();
                     adapter.setMData(records);
-                    progressBar.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.INVISIBLE);
                     setView(records);
                     break;
                 case WRITE_GLORY_OR_CONFESSION_FOR_ALARM:
@@ -208,5 +218,10 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
     private void setView(List<GloryAndConfessionRecord> records)
     {
         viewModel.getCurrentData().setValue(records);
+    }
+
+    public interface AllGloryFragmentBackListener
+    {
+        void onBackForward();
     }
 }
