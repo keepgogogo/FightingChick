@@ -50,8 +50,8 @@ public class EditPersonalDocumentFragment extends Fragment {
                 if(!newFightSlogan.equals("") && !newNickName.equals(""))
                 {
                     SharedPreferences.Editor editor=preferences.edit();
-                    editor.putString("NickName",newNickName);
-                    editor.putString("FightForeverSlogan",newFightSlogan);
+                    editor.putString(getString(R.string.nickname_key),newNickName);
+                    editor.putString(getString(R.string.resolutions_key),newFightSlogan);
                     editor.apply();
                     mainActivity.setFragment(new MineFragment());
                 }

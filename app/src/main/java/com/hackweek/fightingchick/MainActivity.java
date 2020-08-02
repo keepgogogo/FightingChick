@@ -108,6 +108,24 @@ public class MainActivity extends AppCompatActivity {
     }
      **/
 
+    /**
+     * 改变fragment中物理返回键的点击事件，防止返回直接退出app
+     */
+    private AllGloryAndConfessionFragment.AllGloryFragmentBackListener allGloryFragmentBackListener;
+    private boolean inInterception;
+    public AllGloryAndConfessionFragment.AllGloryFragmentBackListener getAllGloryFragmentBackListener()
+    {
+        return allGloryFragmentBackListener;
+    }
 
+    /**
+     * 设置返回键监听
+     */
+    public void setAllGloryFragmentBackListener(AllGloryAndConfessionFragment.AllGloryFragmentBackListener backListener)
+    {
+        this.allGloryFragmentBackListener=backListener;
+    }
+
+    public boolean isInterception(){return inInterception;}
 
 }

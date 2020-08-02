@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".AboutUsFragment">
+
+    <Button
+        android:id="@+id/ButtonForGetBackInAboutUsFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#00BCD4"
+        android:backgroundTint="#00BCD4"
+        android:text="返回"
+        android:textSize="15sp" />
+
 
 
     <TextView
@@ -12,8 +25,8 @@
         android:text="关于我们"
         android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
-        android:textSize="32sp"
+        android:textSize="28sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         />
 
-</FrameLayout>
+</LinearLayout>
