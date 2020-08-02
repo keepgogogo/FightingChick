@@ -2,17 +2,20 @@
     <string name="app_name">永动鸡</string>
     <string name="slogan">摆脱拖延，一起动起来</string>
     <string name="developer_info">版本1.0 开发团队</string>
-    <string name="privacy_policy">用户协议和隐私条款...TODO!!</string>
+    <string name="privacy_policy">用户协议和隐私条款...TODO!!</string><!--TODO-->
     <string name="privacy_policy_agreed">已同意<u>用户协议与隐私条例</u></string>
     <string name="add_notification"><u>应用到闹钟提示界面</u></string>
     <!-- 以下为SharedPreferences中的键 -->
     <string name="saved_agreed_key">已通过用户协议</string>
     <string name="nickname_key">昵称</string>
     <string name="resolutions_key">永动宣言</string>
-    <string name="mychick_key">当前的小鸡</string>
+    <string name="my_chick_name_key">当前的小鸡</string>
+    <string name="my_chick_image_key">当前小鸡的图片路径</string>
     <string name="energy_key">动力值</string>
-    <string name="glories_to_show_key">应用到提示界面的光荣录</string>
-    <string name="confessions_to_show_key">应用到提示界面的忏悔录</string>
+    <!--这三个光荣/忏悔保存最新的三个，到时候随机展示一个-->
+    <string name="glories_confessions_to_show_1_key">应用到提示界面的光荣/忏悔录1</string>
+    <string name="glories_confessions_to_show_2_key">应用到提示界面的光荣/忏悔录2</string>
+    <string name="glories_confessions_to_show_3_key">应用到提示界面的光荣/忏悔录3</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
