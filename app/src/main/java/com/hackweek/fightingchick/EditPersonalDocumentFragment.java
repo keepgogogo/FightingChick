@@ -36,10 +36,10 @@ public class EditPersonalDocumentFragment extends Fragment {
         editFightForeverSlogan=(EditText)view.findViewById(R.id.EditFightForeverSlogan);
         button=(Button)view.findViewById(R.id.ButtonForSaveChangeInPersonalDocument);
 
-        MainActivity mainActivity=new MainActivity();
-        preferences=mainActivity.getSharedPreferences("PersonalDocument", Context.MODE_PRIVATE);
-        originNickName.setText(preferences.getString("NickName","昵称"));
-        originFightForeverSlogan.setText(preferences.getString("FightForeverSlogan","永动宣言"));
+        MainActivity mainActivity=(MainActivity)getActivity();
+        preferences=mainActivity.getPreferences(Context.MODE_PRIVATE);
+        originNickName.setText(preferences.getString(getString(R.string.nickname_key),"昵称"));
+        originFightForeverSlogan.setText(preferences.getString(getString(R.string.resolutions_key),"永动宣言"));
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
