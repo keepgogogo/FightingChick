@@ -3,6 +3,7 @@ package com.hackweek.fightingchick.recycler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,8 @@ import java.text.BreakIterator;
 import java.util.List;
 
 public class GloryAndConfessionAdapter extends RecyclerView
-        .Adapter<GloryAndConfessionAdapter.GloryAndConfessionViewHolder>  {
+        .Adapter<GloryAndConfessionAdapter.GloryAndConfessionViewHolder>
+        implements View.OnClickListener{
 
     final int GET_DATE=0;
     final int GET_GLORY_OR_CONFESSION=1;
@@ -40,6 +42,7 @@ public class GloryAndConfessionAdapter extends RecyclerView
     {
         holder.dateTextView.setText(getDataFromList(position,GET_DATE));
         holder.gloryAndConfessionTextView.setText(getDataFromList(position,GET_GLORY_OR_CONFESSION));
+        holder.buttonForSaveTheGloryAsAlarm.setId(position);
     }
 
     public String getDataFromList(int position,int statement)
@@ -72,14 +75,48 @@ public class GloryAndConfessionAdapter extends RecyclerView
     }
 
 
-    public static class GloryAndConfessionViewHolder extends RecyclerView.ViewHolder
+    public class GloryAndConfessionViewHolder extends RecyclerView.ViewHolder
     {
         public TextView gloryAndConfessionTextView;
         public TextView dateTextView;
+        public Button buttonForSaveTheGloryAsAlarm;
         public GloryAndConfessionViewHolder(@NonNull View itemView) {
             super(itemView);
             gloryAndConfessionTextView=itemView.findViewById(R.id.TextViewForShowGloryAndConfessionInRecycler);
             dateTextView=itemView.findViewById(R.id.TextViewForShowDateInRecycler);
+            buttonForSaveTheGloryAsAlarm=itemView.findViewById(R.id.ButtonForUseTheGloryToAlarmInRecycler);
+            buttonForSaveTheGloryAsAlarm.setOnClickListener(GloryAndConfessionAdapter.this);
+        }
+    }
+
+    //button点击处理
+    private OnRecyclerViewClickListener mClickListener;
+
+    public void setMClickListener(OnRecyclerViewClickListener listener){mClickListener=listener;}
+
+    public enum ViewName{
+        BUTTON_FOR_SET_GLORY_TO_ALARM
+    }
+
+    public interface OnRecyclerViewClickListener
+    {
+        void onClick(View view,ViewName viewName,int position);
+    }
+
+    @Override
+    public void onClick(View view)
+    {
+        int position=(int)view.getId();
+        if(mClickListener!=null)
+        {
+            switch (view.getId())
+            {
+                case R.id.ButtonForUseTheGloryToAlarmInRecycler:
+                    mClickListener.onClick(view,ViewName.BUTTON_FOR_SET_GLORY_TO_ALARM,position);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

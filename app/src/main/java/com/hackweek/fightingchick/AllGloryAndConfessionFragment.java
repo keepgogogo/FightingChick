@@ -1,5 +1,7 @@
 package com.hackweek.fightingchick;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,7 @@ import java.util.List;
 public class AllGloryAndConfessionFragment extends Fragment implements View.OnClickListener{
 
     final int UPDATE_UI=1;
+    final int WRITE_GLORY_OR_CONFESSION_FOR_ALARM=2;
 
     MainActivity mainActivity;
     FocusListDataBase focusListDataBase;
@@ -87,6 +90,22 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
 
         viewModel.getCurrentData().observe(getViewLifecycleOwner(),GloryAndConfessionObserver);
         loadAllRecords(gloryAndConfessionDao);
+
+        //recyclerView item右上角应用到闹钟按钮点击事件
+        adapter.setMClickListener(new GloryAndConfessionAdapter.OnRecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, GloryAndConfessionAdapter.ViewName viewName, int position) {
+                if (viewName == GloryAndConfessionAdapter.ViewName.BUTTON_FOR_SET_GLORY_TO_ALARM)
+                {
+                    GloryAndConfessionRecord record=adapter.getMData().get(position);
+                    Message message=new Message();
+                    message.what=WRITE_GLORY_OR_CONFESSION_FOR_ALARM;
+                    message.obj=record.gloryOrConfession;
+                    FragmentHandler handler=new FragmentHandler();
+                    handler.sendMessage(message);
+                }
+            }
+        });
     }
 
 
@@ -130,17 +149,22 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
     public void onClick(View view) {
         GloryAndConfessionRecordsOperator operator=new GloryAndConfessionRecordsOperator();
         operator.setRecords(recordsCopy);
+        List<GloryAndConfessionRecord> temp;
         switch (view.getId())
         {
             case R.id.ButtonForWatchGloryInAllGloryFragment:
                 buttonForGlory.setTextColor(0x000000);
                 buttonForConfession.setTextColor(0xbfb0b0);
-                setView(operator.getGloryRecord());
+                temp=operator.getGloryRecord();
+                adapter.setMData(temp);
+                setView(temp);
                 break;
             case R.id.ButtonForWatchConfessionInAllGloryFragment:
                 buttonForConfession.setTextColor(0x000000);
                 buttonForGlory.setTextColor(0xbfb0b0);
-                setView(operator.getConfessionRecord());
+                temp=operator.getConfessionRecord();
+                adapter.setMData(temp);
+                setView(temp);
                 break;
             default:
                 break;
@@ -160,9 +184,22 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                     List<GloryAndConfessionRecord> records=(List<GloryAndConfessionRecord>)message.obj;
                     recordsCopy=records;
                     buttonForGlory.setTextColor(0x000000);
+                    GloryAndConfessionRecordsOperator operator=new GloryAndConfessionRecordsOperator();
+                    records=operator.getGloryRecord();
                     adapter.setMData(records);
                     progressBar.setVisibility(View.GONE);
                     setView(records);
+                    break;
+                case WRITE_GLORY_OR_CONFESSION_FOR_ALARM:
+                    String content=(String)message.obj;
+                    SharedPreferences.Editor editor=mainActivity
+                            .getSharedPreferences("AlarmData", Context.MODE_PRIVATE)
+                            .edit();
+                    editor.putString("AlarmGlory",content);
+                    editor.apply();
+                    break;
+
+                default:
                     break;
             }
         }
