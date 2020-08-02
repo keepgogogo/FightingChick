@@ -22,6 +22,7 @@ public abstract class GloryAndConfessionDataBase extends RoomDatabase {
                     INSTANCE= Room.databaseBuilder(context.getApplicationContext(),
                             GloryAndConfessionDataBase.class,
                             "GloryAndConfessionDataBase").build();
+
                 }
             }
         }
