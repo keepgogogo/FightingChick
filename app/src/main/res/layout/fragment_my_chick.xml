@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/huge_padding"
     android:paddingVertical="@dimen/big_padding"
@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/my_chick_profile"
         android:layout_width="match_parent"
-        android:layout_height="1100px"
+        android:layout_height="700px"
         android:scaleType="centerInside"
         android:src="@drawable/logo" />
 
