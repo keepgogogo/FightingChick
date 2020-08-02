@@ -1,6 +1,10 @@
 package com.hackweek.fightingchick;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +30,8 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 
 
 public class AddTaskFragment extends Fragment implements View.OnClickListener,RadioGroup.OnCheckedChangeListener{
+
+    private static final String TAG = "AddTaskFragment";
 
     private Button cancelAddTask;
     private TimePicker timePicker;
@@ -54,6 +61,7 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener,Ra
         cancelAddTask = (Button)view.findViewById(R.id.cancel_add_task);
         cancelAddTask.setOnClickListener(this);
         timePicker = (TimePicker)view.findViewById(R.id.new_task_timepicker);
+        timePicker.setIs24HourView(true);
         editNewTask= (EditText)view.findViewById(R.id.edit_new_task);
         checkBoxVibrate = (CheckBox)view.findViewById(R.id.checkbox_vibrate);
         checkBoxRing = (CheckBox)view.findViewById(R.id.checkbox_ring);
@@ -185,6 +193,32 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener,Ra
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_task, container, false);
+    }
+
+    private AlarmManager getAlarmManager(){
+        return (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+    }
+
+    private void createAlarm(Intent i, int requestCode, long timeInMillis) {
+        AlarmManager am = getAlarmManager();
+        PendingIntent pi = PendingIntent.getService(getContext(), requestCode, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.set(AlarmManager.RTC_WAKEUP, timeInMillis, pi);
+        Log.d(TAG, "createAlarm "+requestCode+" time: "+timeInMillis+" PI "+pi.toString());
+    }
+
+    private boolean doesPendingIntentExist(Intent i, int requestCode) {
+        PendingIntent pi = PendingIntent.getService(getContext(), requestCode, i, PendingIntent.FLAG_NO_CREATE);
+        return pi != null;
+    }
+
+
+    private void deleteAlarm(Intent i, int requestCode) {
+        if (doesPendingIntentExist(i, requestCode)) {
+            PendingIntent pi = PendingIntent.getService(getContext(), requestCode, i, PendingIntent.FLAG_NO_CREATE);
+            pi.cancel();
+            getAlarmManager().cancel(pi);
+            Log.d(TAG, "PI Cancelled " + doesPendingIntentExist(i, requestCode));
+        }
     }
 
 

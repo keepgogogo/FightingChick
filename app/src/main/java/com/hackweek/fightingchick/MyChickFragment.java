@@ -1,5 +1,7 @@
 package com.hackweek.fightingchick;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +18,7 @@ import android.widget.TextView;
 
 public class MyChickFragment extends Fragment {
 
-
+    private SharedPreferences myChickSp;
     public MyChickFragment() {
         // Required empty public constructor
     }
@@ -42,7 +44,9 @@ public class MyChickFragment extends Fragment {
         TextView myChickName = view.findViewById(R.id.my_chick_name);
         ProgressBar upgradeProgressBar = view.findViewById(R.id.upgrade_progress_bar);
         TextView energyValue = view.findViewById(R.id.energy_value);
-        //myChickName.setText();
+        myChickSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
+        myChickName.setText(myChickSp.getString(getString(R.string.my_chick_name_key),"白切鸡"));
+        energyValue.setText(myChickSp.getString(getString(R.string.energy_key),"0"));
         //upgradeProgressBar.setProgress();
         //energyValue.setText();
     }

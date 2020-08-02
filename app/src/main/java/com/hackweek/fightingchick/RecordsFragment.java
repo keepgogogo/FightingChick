@@ -63,7 +63,7 @@ public class RecordsFragment extends Fragment {
         top_records_nickname = (TextView)view.findViewById(R.id.top_nickname);
         top_records_resolutions = (TextView)view.findViewById(R.id.top_resolutions);
 
-        SharedPreferences RecordsSp = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences RecordsSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
 
         top_records_nickname.setText(RecordsSp.getString(getString(R.string.nickname_key),"昵称"));
         top_records_resolutions.setText(RecordsSp.getString(getString(R.string.resolutions_key),"永动宣言"));

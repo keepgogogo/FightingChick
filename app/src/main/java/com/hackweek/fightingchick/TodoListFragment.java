@@ -65,7 +65,7 @@ public class TodoListFragment extends Fragment {
             }
         });
         // init sp
-        todoListSp = getActivity().getPreferences(Context.MODE_PRIVATE);
+        todoListSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
         todoListSpEditor = todoListSp.edit();
         //init top view
         nickNameTextView.setText(todoListSp.getString(getString(R.string.nickname_key),"昵称"));
