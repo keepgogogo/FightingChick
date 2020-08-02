@@ -60,7 +60,7 @@ public class EditPersonalDocumentFragment extends Fragment {
                     AlertDialog.Builder dialog=new AlertDialog.Builder(mainActivity);
                     dialog.setTitle("提示");
                     dialog.setCancelable(true);
-                    dialog.setMessage("请确保新昵称和新永战宣言不为空，且昵称字数不超过9个");
+                    dialog.setMessage("请确保新昵称和新永动宣言不为空，且昵称字数不超过9个");
                     dialog.setPositiveButton("好的", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
