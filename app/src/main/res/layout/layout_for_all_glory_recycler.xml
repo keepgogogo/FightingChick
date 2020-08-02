@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:id="@+id/card_view_for_all_glory_recycler">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TextViewForShowGloryAndConfessionInRecycler"
+            android:text="测试"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="28sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TextViewForShowGloryAndConfessionInRecycler"
+            android:text="测试"
+            android:textSize="25sp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/TextViewForShowDateInRecycler"/>
+
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

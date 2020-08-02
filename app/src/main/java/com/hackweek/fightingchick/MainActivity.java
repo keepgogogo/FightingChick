@@ -7,18 +7,29 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hackweek.fightingchick.database.FocusListDataBase;
+import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    final int TRANSFER_DATABASE_TO_MINE_FRAGMENT=566;
+
     private BottomNavigationView mBottomNavigationView;
+    public FocusListDataBase focusListDataBase;
+    public GloryAndConfessionDataBase gloryAndConfessionDataBase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         initBottomNavigation();
         Fragment todoListFragment = new TodoListFragment();
         setFragment(todoListFragment);
+
+        focusListDataBase= Room.databaseBuilder(getApplicationContext(), FocusListDataBase.class,
+                "FocusDataBase").build();
+        gloryAndConfessionDataBase=Room.databaseBuilder(getApplicationContext(), GloryAndConfessionDataBase.class,
+                "GloryAndConfessionDataBase").build();
     }
 
     public void initBottomNavigation() {
@@ -47,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mineFragment:
                         Fragment mineFragment = new MineFragment();
                         setFragment(mineFragment);
+
+//                        handler.sendMessage(message);
                         //setFragmentPosition(2);
                         break;
                     default:
@@ -64,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frame_for_fragment,fragment).commit();
     }
+
 
     /**看不懂的废弃方法
     public void setFragmentPosition(int position) {
