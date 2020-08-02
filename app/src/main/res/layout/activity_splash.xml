@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:theme="@style/Theme.Design.Light.NoActionBar"
+    android:theme="@style/AppTheme"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/small_padding"
@@ -55,6 +55,7 @@
         <Button
             android:id="@+id/enter"
             android:layout_width="90dp"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/privacy_2"
             android:layout_above="@id/privacy_2"

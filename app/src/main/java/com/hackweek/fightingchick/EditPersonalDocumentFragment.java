@@ -77,11 +77,6 @@ public class EditPersonalDocumentFragment extends Fragment {
 
 
 
-
-
-
-
-
     public EditPersonalDocumentFragment() {
         // Required empty public constructor
     }

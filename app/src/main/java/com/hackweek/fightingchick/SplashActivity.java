@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     private Button button;
     private CheckBox checkBox;
     private TextView textView;
-    private final int SPLASH_TIME_OUT=1000;
+    private final int SPLASH_TIME_OUT=200;
     private SharedPreferences SplashActivitySP;
 
     @Override
@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if(SplashActivitySP.getInt(getString(R.string.saved_agreed_key),0)==1){
-            //确认过了，隐藏“进入”按钮，“同意”设置为不可点击，倒计时3秒后进入下一活动
+            //确认过了，隐藏“进入”按钮，“同意”设置为不可点击，倒计时1秒后进入下一活动
             button.setVisibility(View.INVISIBLE);
             button.setClickable(false);
             checkBox.setChecked(true);

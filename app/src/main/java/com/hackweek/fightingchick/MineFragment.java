@@ -53,18 +53,19 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         buttonForSetPersonalStatics=(Button)view.findViewById(R.id.ButtonForChangePersonalDocument);
         buttonForWatchAboutUs=(Button)view.findViewById(R.id.ButtonForWatchAboutUsInMineFragment);
         buttonForWatchGloryAndConfessions=(Button)view.findViewById(R.id.ButtonForWatchGloryAndConfessionInMineFragment);
+        buttonForSetPersonalStatics.setOnClickListener(this);
+        buttonForWatchAboutUs.setOnClickListener(this);
+        buttonForWatchGloryAndConfessions.setOnClickListener(this);
 
         MainActivity mainActivity=(MainActivity)getActivity();
         assert mainActivity != null;
-        preferences=mainActivity.getSharedPreferences("PersonalDocument", Context.MODE_PRIVATE);
-
-        nickNameTextView.setText(preferences.getString("NickName","昵称"));
-        fightingForeverSloganTextView.setText(preferences.getString("FightForeverSlogan","永动宣言"));
-
-
+        preferences=mainActivity.getPreferences( Context.MODE_PRIVATE);
+        nickNameTextView.setText(preferences.getString(getString(R.string.nickname_key),"昵称"));
+        fightingForeverSloganTextView.setText(preferences.getString(getString(R.string.resolutions_key),"永动宣言"));
 
         return view;
     }
+
 
     @Override
     public void onClick(View view) {
