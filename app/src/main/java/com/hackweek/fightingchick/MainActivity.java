@@ -10,6 +10,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 import androidx.room.migration.Migration;
 
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -79,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    //以形如20200803的int值返回当前日期
+    public int getNewDate(){
+        Calendar currentCalendar = Calendar.getInstance();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        String newDateString = fmt.format(currentCalendar.getTime());
+        return Integer.parseInt(newDateString);
     }
 
 

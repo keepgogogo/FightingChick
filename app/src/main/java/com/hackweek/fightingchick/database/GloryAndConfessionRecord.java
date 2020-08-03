@@ -6,6 +6,12 @@ import androidx.room.PrimaryKey;
 
 @Entity( tableName = "GloryAndConfessionRecord")
 public class GloryAndConfessionRecord {
+
+    public GloryAndConfessionRecord(int date, String content, boolean gloryOrConfession){
+        this.date=date;
+        this.content = content;
+        this.gloryOrConfession = gloryOrConfession;
+    }
     @PrimaryKey(autoGenerate = true)
     public int id;
 

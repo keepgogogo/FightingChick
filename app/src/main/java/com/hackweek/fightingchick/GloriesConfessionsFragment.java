@@ -2,6 +2,8 @@ package com.hackweek.fightingchick;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
+import com.hackweek.fightingchick.database.GloryAndConfessionRecord;
+import com.hackweek.fightingchick.toolpackage.ThreadHelper;
 
 public class GloriesConfessionsFragment extends Fragment implements View.OnClickListener {
 
@@ -30,6 +35,7 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
     private SharedPreferences gloriesConfessionsSp;
     private SharedPreferences.Editor gloriesConfessionsSpEditor;
     private String content;
+    MainActivity mainActivity;
 
     public GloriesConfessionsFragment() {
         // Required empty public constructor
@@ -39,6 +45,7 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = (MainActivity)getActivity();
 
     }
 
@@ -66,6 +73,12 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
 
     }
 
+    private void saveGloriesConfessionsToRoom(GloryAndConfessionRecord gloryAndConfessionRecord){
+        ThreadHelper mThreadHelper = new ThreadHelper();
+        mThreadHelper.insertGloryAndConfession(
+                GloryAndConfessionDataBase.getDataBase(mainActivity),gloryAndConfessionRecord);
+    }
+
     // save to Sp:alarm
     private void saveGloriesConfessionsToAlarm(String mContent){
         if (TextUtils.isEmpty(mContent)) {
@@ -84,6 +97,8 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
         Toast.makeText(getContext(), "已应用到闹钟提示界面", Toast.LENGTH_SHORT).show();
     }
 
+
+
     @Override
     public void onClick(View view) {
 
@@ -94,7 +109,9 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
                 if (TextUtils.isEmpty(content)) {
                     Toast.makeText(getContext(), "内容不能为空！", Toast.LENGTH_SHORT).show();
                 } else {
-                    //TODO
+                    GloryAndConfessionRecord newConfession = new GloryAndConfessionRecord(
+                            mainActivity.getNewDate(),content,false);
+                    saveGloriesConfessionsToRoom(newConfession);
                     Toast.makeText(getContext(), "已保存", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -104,7 +121,9 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
                 if (TextUtils.isEmpty(content)) {
                     Toast.makeText(getContext(), "内容不能为空！", Toast.LENGTH_SHORT).show();
                 } else {
-                    //TODO
+                    GloryAndConfessionRecord newGlory = new GloryAndConfessionRecord(
+                            mainActivity.getNewDate(),content,true);
+                    saveGloriesConfessionsToRoom(newGlory);
                     Toast.makeText(getContext(), "已保存", Toast.LENGTH_SHORT).show();
                 }
                 break;
