@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 
 public class EditPersonalDocumentFragment extends Fragment implements View.OnClickListener{
@@ -124,38 +128,72 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
                     editor.apply();
                     Toast.makeText(getContext(),"保存成功",Toast.LENGTH_SHORT).show();
 
-                    //启动线程用于保存头像图片
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ParcelFileDescriptor parcelFileDescriptor = null;
-                            try {
-                                parcelFileDescriptor = mainActivity.getContentResolver()
-                                        .openFileDescriptor(newHeadPortraitUri, "r");
-                                FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-                                Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-                                File file=new File(mainActivity.getFilesDir()+"/"+MineFragment.HEAD_PORTRAIT);
-                                if(file.exists())
-                                {
-                                    file.delete();
-                                    file.createNewFile();
-                                }
-                                FileOutputStream outputStream=new FileOutputStream(file);
-                                image.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
-                                outputStream.flush();
-                                outputStream.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
 
-                        }
-                    }).start();
                     progressBar.setVisibility(View.VISIBLE);
+
+                    Luban.with(mainActivity)
+                            .load(new File(mainActivity.getFilesDir()
+                                    +"/"+MineFragment.HEAD_PORTRAIT))
+                            .ignoreBy(100)
+                            .setTargetDir(mainActivity.getFilesDir().getPath())
+                            .filter(new CompressionPredicate() {
+                                @Override
+                                public boolean apply(String path) {
+                                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                }
+                            })
+                            .setCompressListener(new OnCompressListener() {
+                                @Override
+                                public void onStart() {
+                                    Log.d(TAG, "onStart: luban start");
+                                }
+
+                                @Override
+                                public void onSuccess(File file) {
+//                                    Bitmap bitmap=BitmapFactory.decodeFile(file);
+                                    Log.d(TAG, "onStart: luban success handled file "+file.length());
+//                                    file.renameTo(new File(mainActivity.getFilesDir()
+//                                            +"/"+MineFragment.HEAD_PORTRAIT));
+
+//                                    if(file.exists())
+//                                    {
+//                                        try {
+//                                            file.delete();
+//                                            file.createNewFile();
+//                                        } catch (Exception e) {
+//                                            e.printStackTrace();
+//                                        }
+//                                    }
+                                    try {
+                                        byte[] bytes=new byte[(int)(file.length())];
+                                        FileInputStream inputStream=new FileInputStream(file);
+                                        inputStream.read(bytes);
+                                        inputStream.close();
+                                        FileOutputStream outputStream=
+                                                new FileOutputStream(new File(mainActivity.getFilesDir()
+                                                +"/"+MineFragment.HEAD_PORTRAIT));
+//                                        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+                                        outputStream.write(bytes);
+                                        outputStream.flush();
+                                        outputStream.close();
+                                        Log.d(TAG, "onSuccess: luban save success");
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Log.d(TAG, "onError: luban fail");
+                                }
+                            }).launch();
                     new Handler().postDelayed(new Runnable() {
 
                         @Override
                         public void run() {
 //                            progressBar.setVisibility(View.GONE);
+                            Log.d(TAG, "run: new MineFragment first");
                             mainActivity.setFragment(new MineFragment());
                         }
                     }, ADD_TIME_OUT);
@@ -219,6 +257,29 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
                             mainActivity.getContentResolver().openFileDescriptor(newHeadPortraitUri, "r");
                     FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
                     Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+
+                    //启动线程用于保存头像图片
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                File file=new File(mainActivity.getFilesDir()+"/"+MineFragment.HEAD_PORTRAIT);
+                                Log.d(TAG, "run: origin chosen "+file.length());
+                                if(file.exists())
+                                {
+                                    file.delete();
+                                    file.createNewFile();
+                                }
+                                FileOutputStream outputStream=new FileOutputStream(file);
+                                image.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+                                outputStream.flush();
+                                outputStream.close();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }).start();
                     circleImageView.setImageBitmap(image);
                     parcelFileDescriptor.close();
                 }

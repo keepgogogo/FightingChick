@@ -86,5 +86,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.8.0'
     // 查看数据库的工具
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    //图片处理
+    implementation 'top.zibin:Luban:1.1.8'
 
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MineFragment extends Fragment implements View.OnClickListener {
 
     final static String HEAD_PORTRAIT="portrait.jpg";
+    private static final String TAG = "MineFragment";
 
     final int TRANSFER_DATABASE_TO_MINE_FRAGMENT=566;
 
@@ -128,6 +130,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     public boolean isPortraitExisted()
     {
         File file=new File(mainActivity.getFilesDir()+"/"+HEAD_PORTRAIT);
+        Log.d(TAG, "isPortraitExisted: portrait loaded  "+file.length());
         return file.exists();
     }
 //    @Override
