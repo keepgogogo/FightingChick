@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hackweek.fightingchick">
 
-    <uses-permission android:name="ANDROID.PERMISSION.INTERNET" />
-    <uses-permission android:name="ANDROID.PERMISSION.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,24 +11,18 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".reminder.ReminderActivity">
-
-        </activity>
-
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".reminder.ReminderActivity"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity"></activity>
 
-        <service android:name=".utility.TodoNotificationService"
-            />
-        <service android:name=".utility.DeleteNotificationService"
-            />
-
+        <service android:name=".utility.TodoNotificationService" />
+        <service android:name=".utility.DeleteNotificationService" />
     </application>
 
 </manifest>

@@ -2,6 +2,8 @@ package com.hackweek.fightingchick;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,8 +19,18 @@ import android.widget.TextView;
 import com.hackweek.fightingchick.database.FocusListDataBase;
 import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class MineFragment extends Fragment implements View.OnClickListener {
+
+    final static String HEAD_PORTRAIT="portrait.jpg";
 
     final int TRANSFER_DATABASE_TO_MINE_FRAGMENT=566;
 
@@ -28,6 +40,9 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     Button buttonForSetPersonalStatics;
     Button buttonForWatchGloryAndConfessions;
     Button buttonForWatchAboutUs;
+    CircleImageView circleImageView;
+
+    MainActivity mainActivity;
 
 
 
@@ -47,6 +62,18 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        mainActivity=(MainActivity)getActivity();
+
+        circleImageView=(CircleImageView)view.findViewById(R.id.CircleImageViewForHeadPortraitInMineFragment);
+
+        if(isPortraitExisted()) {
+            try {
+                setViewHeadPortrait();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         nickNameTextView=(TextView)view.findViewById(R.id.NickName);
         fightingForeverSloganTextView=(TextView)view.findViewById(R.id.FightingForeverSlogan);
@@ -92,6 +119,17 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void setViewHeadPortrait() throws FileNotFoundException {
+        FileInputStream inputStream=mainActivity.openFileInput(HEAD_PORTRAIT);
+        Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
+        circleImageView.setImageBitmap(bitmap);
+    }
+
+    public boolean isPortraitExisted()
+    {
+        File file=new File(mainActivity.getFilesDir()+"/"+HEAD_PORTRAIT);
+        return file.exists();
+    }
 //    @Override
 //    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 //        aboutUs = (Button)view.findViewById(R.id.ButtonForWatchAboutUsInMineFragment);

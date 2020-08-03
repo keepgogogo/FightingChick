@@ -52,6 +52,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void run() {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                    Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -75,6 +76,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                     editor.apply();
                     //启动活动
                     Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+//                    Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
                 }else{

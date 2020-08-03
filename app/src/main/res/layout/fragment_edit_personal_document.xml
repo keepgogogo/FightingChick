@@ -8,7 +8,6 @@
     android:theme="@style/AppTheme"
 
     tools:context=".EditPersonalDocumentFragment">
-
     <ImageButton
         android:id="@+id/back_from_edit_personal"
         android:layout_width="40dp"
@@ -16,6 +15,18 @@
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@mipmap/baseline_arrow_back_black_24" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/CircleImageViewForEditInEditFragment"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/logo"
+        android:clickable="true"
+        />
+
+
 
     <TextView
         android:id="@+id/TextViewForOriginNickName"
@@ -93,6 +104,12 @@
 
     </LinearLayout>
 
+    <ProgressBar
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ProgressBarInEditPersonalDocumentFragment"/>
+
 
     <Button
         android:id="@+id/ButtonForSaveChangeInPersonalDocument"
@@ -100,8 +117,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="保存"
-        android:layout_marginTop="@dimen/big_padding"
+        android:layout_marginTop="10dp"
         android:textSize="26sp"
         android:theme="@style/AppTheme" />
+
+
 
 </LinearLayout>

@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/CircleImageViewForHeadPortrait"
+            android:id="@+id/CircleImageViewForHeadPortraitInMineFragment"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
@@ -36,6 +36,7 @@
             android:text="永动宣言"
             android:id="@+id/FightingForeverSlogan"
             android:layout_gravity="center"
+            android:textSize="20sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             />
 
@@ -49,7 +50,7 @@
             android:layout_marginTop="1dp"
             android:layout_marginHorizontal="@dimen/small_padding"
             android:text="编辑个人资料"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
 
         <Button
             android:layout_width="wrap_content"
