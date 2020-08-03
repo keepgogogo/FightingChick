@@ -95,8 +95,8 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
 
 
         preferences = mainActivity.getPreferences(Context.MODE_PRIVATE);
-        editNickName.setHint(preferences.getString(getString(R.string.nickname_key), "请在此输入新昵称"));
-        editFightForeverSlogan.setHint(preferences.getString(getString(R.string.resolutions_key), "请在此输入新的永动宣言"));
+        editNickName.setText(preferences.getString(getString(R.string.nickname_key), "请在此输入新昵称"));
+        editFightForeverSlogan.setText(preferences.getString(getString(R.string.resolutions_key), "请在此输入新的永动宣言"));
 
 
     }

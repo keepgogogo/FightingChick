@@ -61,7 +61,7 @@ public class GloryAndConfessionAdapter extends RecyclerView
                 stringBuilder.append(record.date%100);
                 break;
             case GET_GLORY_OR_CONFESSION:
-                stringBuilder.append(record.gloryOrConfession);
+                stringBuilder.append(record.content);
                 break;
             default:
                 break;
@@ -109,14 +109,15 @@ public class GloryAndConfessionAdapter extends RecyclerView
         int position=(int)view.getId();
         if(mClickListener!=null)
         {
-            switch (view.getId())
-            {
-                case R.id.ButtonForUseTheGloryToAlarmInRecycler:
-                    mClickListener.onClick(view,ViewName.BUTTON_FOR_SET_GLORY_TO_ALARM,position);
-                    break;
-                default:
-                    break;
-            }
+//            switch (view.getId())
+//            {
+//                case R.id.ButtonForUseTheGloryToAlarmInRecycler:
+//                    mClickListener.onClick(view,ViewName.BUTTON_FOR_SET_GLORY_TO_ALARM,position);
+//                    break;
+//                default:
+//                    break;
+//            }
+            mClickListener.onClick(view,ViewName.BUTTON_FOR_SET_GLORY_TO_ALARM,position);
         }
     }
 }
