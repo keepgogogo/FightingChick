@@ -229,9 +229,7 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener, R
                 if (newInterval == 0)//选择的不是自定义间隔
                     newInterval = getInterval();
                 newDayOfWeek = currentCalendar.get(Calendar.DAY_OF_WEEK);
-                SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-                String newDateString = fmt.format(currentCalendar.getTime());
-                newDate = Integer.parseInt(newDateString);
+                newDate = mainActivity.getNewDate();
 
                 // save using Room
                 FocusList newFocusList = new FocusList(newDate,
