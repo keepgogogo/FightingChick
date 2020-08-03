@@ -9,8 +9,6 @@
     <string name="saved_agreed_key">已通过用户协议</string>
     <string name="nickname_key">昵称</string>
     <string name="resolutions_key">永动宣言</string>
-    <string name="my_chick_name_key">当前的小鸡</string>
-    <string name="my_chick_image_key">当前小鸡的图片路径</string>
     <string name="energy_key">动力值</string>
     <!--这三个光荣/忏悔保存最新的三个，到时候随机展示一个-->
     <string name="glories_confessions_to_show_1_key">应用到提示界面的光荣/忏悔录1</string>

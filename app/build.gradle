@@ -62,6 +62,7 @@ dependencies {
     implementation 'im.dacer:AndroidCharts:1.0.4'
 
 
+
     //RoomDataBase
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"

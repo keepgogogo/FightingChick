@@ -12,7 +12,8 @@
     <ImageView
         android:id="@+id/my_chick_profile"
         android:layout_width="match_parent"
-        android:layout_height="700px"
+        android:layout_height="0dp"
+        android:layout_weight="6"
         android:scaleType="centerInside"
         android:src="@drawable/logo" />
 
@@ -21,15 +22,17 @@
         android:id="@+id/my_chick_name"
         android:layout_marginTop="@dimen/big_padding"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:text="白切鸡" />
 
     <ProgressBar
         android:id="@+id/upgrade_progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/small_padding"
+        android:layout_weight="1"
         android:max="100"
         android:progress="0" />
 
@@ -37,7 +40,8 @@
         android:id="@+id/energy_value"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="动力值:0" />
 
 

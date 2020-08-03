@@ -202,10 +202,21 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                     break;
                 case WRITE_GLORY_OR_CONFESSION_FOR_ALARM:
                     String content=(String)message.obj;
-                    SharedPreferences.Editor editor=mainActivity
-                            .getSharedPreferences("AlarmData", Context.MODE_PRIVATE)
-                            .edit();
-                    editor.putString("AlarmGlory",content);
+                    MainActivity mainActivity = (MainActivity)getActivity();
+                    SharedPreferences sp = mainActivity.getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor= sp.edit();
+                    //把sp中的2号光荣/忏悔挪到3,1挪到2,空出1留给最新的
+                    editor.putString(
+                            getString(R.string.glories_confessions_to_show_3_key),
+                            sp.getString(getString(R.string.glories_confessions_to_show_2_key),""));
+                    editor.putString(
+                            getString(R.string.glories_confessions_to_show_2_key),
+                            sp.getString(getString(R.string.glories_confessions_to_show_1_key),""));
+                    editor.putString(
+                            getString(R.string.glories_confessions_to_show_1_key),
+                            content
+                    );
+
                     editor.apply();
                     break;
 
