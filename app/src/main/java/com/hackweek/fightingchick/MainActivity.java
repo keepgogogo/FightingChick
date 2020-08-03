@@ -8,12 +8,15 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
+import androidx.room.migration.Migration;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.amitshekhar.DebugDB;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hackweek.fightingchick.database.FocusListDataBase;
 import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
@@ -35,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initBottomNavigation();
+        Toast.makeText(getApplicationContext(),DebugDB.getAddressLog().toString(),Toast.LENGTH_LONG).show();
         Fragment todoListFragment = new TodoListFragment();
         setFragment(todoListFragment);
+        focusListDataBase = FocusListDataBase.getDatabase(getApplicationContext());
+        gloryAndConfessionDataBase = GloryAndConfessionDataBase.getDataBase(getApplicationContext());
 
-        focusListDataBase= Room.databaseBuilder(getApplicationContext(), FocusListDataBase.class,
-                "FocusDataBase").build();
-        gloryAndConfessionDataBase=Room.databaseBuilder(getApplicationContext(), GloryAndConfessionDataBase.class,
-                "GloryAndConfessionDataBase").build();
+//        focusListDataBase= Room.databaseBuilder(getApplicationContext(), FocusListDataBase.class,
+//         "FocusDataBase").build();
+//        gloryAndConfessionDataBase=Room.databaseBuilder(getApplicationContext(), GloryAndConfessionDataBase.class,
+//                "GloryAndConfessionDataBase").build();
     }
 
     public void initBottomNavigation() {

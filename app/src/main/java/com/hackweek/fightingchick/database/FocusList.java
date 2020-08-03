@@ -10,6 +10,21 @@ import java.util.UUID;
 @Entity(tableName = "FocusList")
 public class FocusList {
 
+    public FocusList(int date, int hour, int minute, int FocusTime,
+                     String whatTodo, int notice, int noticeMusic,
+                     int noticeInterval, int weekday) {
+        this.date = date;
+        this.hour = hour;
+        this.minute = minute;
+        this.FocusTime = FocusTime;
+        this.whatTodo = whatTodo;
+        this.notice = notice;
+        this.noticeMusic = noticeMusic;
+        this.noticeInterval = noticeInterval;
+        this.weekday = weekday;
+        this.identifier = UUID.randomUUID().toString();
+    }
+
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo
@@ -19,10 +34,10 @@ public class FocusList {
     @ColumnInfo
     public int minute;
     //length of focus time should be saved by minutes
-    @ColumnInfo( name = "FocusTime")
+    @ColumnInfo(name = "FocusTime")
     public int FocusTime;
 
-    @ColumnInfo( name = "whatToDo")
+    @ColumnInfo(name = "whatToDo")
     public String whatTodo;
 
     //notice = 0 提示方式为响铃
@@ -41,7 +56,7 @@ public class FocusList {
     @ColumnInfo
     public int noticeInterval;
 
-    //weekday=1 to 7 means Monday to Sunday
+    //weekday=1 to 7 means Sunday to Monday
     @ColumnInfo
     public int weekday;
 

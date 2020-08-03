@@ -80,4 +80,7 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    // 查看数据库的工具
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
 }

@@ -66,6 +66,24 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
 
     }
 
+    // save to Sp:alarm
+    private void saveGloriesConfessionsToAlarm(String mContent){
+        if (TextUtils.isEmpty(mContent)) {
+            Toast.makeText(getContext(), "提示内容不能为空！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //把sp中的2号光荣/忏悔挪到3,1挪到2,空出1留给最新的
+        gloriesConfessionsSpEditor.putString(
+                getString(R.string.glories_confessions_to_show_3_key),
+                gloriesConfessionsSp.getString(getString(R.string.glories_confessions_to_show_2_key),""));
+        gloriesConfessionsSpEditor.putString(
+                getString(R.string.glories_confessions_to_show_2_key),
+                gloriesConfessionsSp.getString(getString(R.string.glories_confessions_to_show_1_key),""));
+        gloriesConfessionsSpEditor.putString(getString(R.string.glories_confessions_to_show_1_key), mContent);
+        gloriesConfessionsSpEditor.apply();
+        Toast.makeText(getContext(), "已应用到闹钟提示界面", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onClick(View view) {
 
@@ -92,22 +110,12 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
                 break;
             //保存忏悔录或光荣录到sp
             case R.id.add_confessions_notification:
-            case R.id.add_glories_notification:
                 content = editConfessions.getText().toString().trim();
-                if (TextUtils.isEmpty(content)) {
-                    Toast.makeText(getContext(), "提示内容不能为空！", Toast.LENGTH_SHORT).show();
-                } else {
-                    //把sp中的2号光荣/忏悔挪到3,1挪到2,空出1留给最新的
-                    gloriesConfessionsSpEditor.putString(
-                            getString(R.string.glories_confessions_to_show_3_key),
-                            gloriesConfessionsSp.getString(getString(R.string.glories_confessions_to_show_2_key),""));
-                    gloriesConfessionsSpEditor.putString(
-                            getString(R.string.glories_confessions_to_show_2_key),
-                            gloriesConfessionsSp.getString(getString(R.string.glories_confessions_to_show_1_key),""));
-                    gloriesConfessionsSpEditor.putString(getString(R.string.glories_confessions_to_show_1_key), content);
-                    gloriesConfessionsSpEditor.apply();
-                    Toast.makeText(getContext(), "已应用到闹钟提示界面", Toast.LENGTH_SHORT).show();
-                }
+                saveGloriesConfessionsToAlarm(content);
+                break;
+            case R.id.add_glories_notification:
+                content = editGlories.getText().toString().trim();
+                saveGloriesConfessionsToAlarm(content);
                 break;
         }
     }
