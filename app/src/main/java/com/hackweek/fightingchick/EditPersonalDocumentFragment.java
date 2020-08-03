@@ -42,7 +42,7 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
 
     private static final int READ_REQUEST_CODE = 42;
     private static final String TAG ="EditPersonalDocumentFragment" ;
-    final int ADD_TIME_OUT=200;
+    final int ADD_TIME_OUT=500;
 
 
     SharedPreferences preferences;
@@ -155,7 +155,7 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
 
                         @Override
                         public void run() {
-                            progressBar.setVisibility(View.GONE);
+//                            progressBar.setVisibility(View.GONE);
                             mainActivity.setFragment(new MineFragment());
                         }
                     }, ADD_TIME_OUT);
