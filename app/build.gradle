@@ -89,4 +89,6 @@ dependencies {
     //图片处理
     implementation 'top.zibin:Luban:1.1.8'
 
+    //图表
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

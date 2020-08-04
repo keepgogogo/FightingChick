@@ -1,10 +1,15 @@
 package com.hackweek.fightingchick.toolpackage;
 
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Message;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.hackweek.fightingchick.StatisticsFragment;
 import com.hackweek.fightingchick.database.FocusList;
 import com.hackweek.fightingchick.database.FocusListDao;
 import com.hackweek.fightingchick.database.FocusListDataBase;
@@ -91,5 +96,20 @@ public class ThreadHelper implements ThreadHelperInterface{
         });
     }
 
+    public void loadTodayForStatisticsFragment(StatisticsFragment.StatisticsFragmentHandler handler,FocusListDao dao)
+    {
+        thread.execute(new Runnable() {
+            @Override
+            public void run() {
+                Calendar currentCalendar = Calendar.getInstance();
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+                String newDateString = fmt.format(currentCalendar.getTime());
+                Message message=new Message();
+                message.obj=dao.getByDate(Integer.parseInt(newDateString));
+                message.what=StatisticsFragment.RECEIVE_TODAY_FOCUS_LIST;
+                handler.sendMessage(message);
+            }
+        });
+    }
 
 }
