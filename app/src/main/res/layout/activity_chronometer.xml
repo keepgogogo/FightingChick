@@ -22,7 +22,6 @@
         android:layout_gravity="left"
         android:layout_height="wrap_content"
         android:text="任务名称"
-        android:textColor="@color/colorPrimary"
         android:textSize="30sp" />
 
 

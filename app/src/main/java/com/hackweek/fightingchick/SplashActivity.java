@@ -98,7 +98,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 if(!checkBox.isChecked())
                     button.setBackgroundColor(getColor(R.color.colorGrey));
                 else
-                    button.setBackgroundColor(getColor(R.color.colorPrimary));
+                    button.setBackgroundColor(getColor(R.color.primaryColor));
         }
     }
 
