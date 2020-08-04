@@ -95,8 +95,8 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
 
 
         preferences = mainActivity.getPreferences(Context.MODE_PRIVATE);
-        editNickName.setText(preferences.getString(getString(R.string.nickname_key), "请在此输入新昵称"));
-        editFightForeverSlogan.setText(preferences.getString(getString(R.string.resolutions_key), "请在此输入新的永动宣言"));
+        editNickName.setText(preferences.getString(getString(R.string.nickname_key), ""));
+        editFightForeverSlogan.setText(preferences.getString(getString(R.string.resolutions_key), ""));
 
 
     }
@@ -214,15 +214,19 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
                 break;
                 //昵称输入处退格
             case R.id.clear_nickname:
-                StringBuilder sb=new StringBuilder(editNickName.getText());
-                sb.deleteCharAt(sb.length()-1);
-                editNickName.setText(sb.toString());
+                if(!TextUtils.isEmpty(editNickName.getText().toString())){
+                    StringBuilder sb=new StringBuilder(editNickName.getText());
+                    sb.deleteCharAt(sb.length()-1);
+                    editNickName.setText(sb.toString());
+                }
                 break;
                 //永动宣言输入处退格
             case R.id.clear_slogan:
-                StringBuilder sp=new StringBuilder(editFightForeverSlogan.getText());
-                sp.deleteCharAt(sp.length()-1);
-                editFightForeverSlogan.setText(sp.toString());
+                if(!TextUtils.isEmpty(editFightForeverSlogan.getText().toString())){
+                    StringBuilder sp=new StringBuilder(editFightForeverSlogan.getText());
+                    sp.deleteCharAt(sp.length()-1);
+                    editFightForeverSlogan.setText(sp.toString());
+                }
                 break;
                 //从修改个人资料fragment返回 我的 fragment
             case R.id.back_from_edit_personal:
