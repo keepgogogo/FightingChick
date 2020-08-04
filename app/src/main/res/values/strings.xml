@@ -8,6 +8,8 @@
     <string name="channel_description">Notification channel for FightingChick without descriptions</string>
     <string name="channel_id">ThisIsDefinitelyAUniqueId</string>
     <string name="add_notification"><u>应用到闹钟提示界面</u></string>
+    <string name="focusList_to_chronometer">送给计时器的任务</string>
+    <string name="bigSp_key">获取全局的sp</string>
     <!-- 以下为SharedPreferences中的键 -->
     <string name="saved_agreed_key">已通过用户协议</string>
     <string name="nickname_key">昵称</string>

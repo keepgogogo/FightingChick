@@ -53,7 +53,8 @@ public class MyChickFragment extends Fragment {
         upgradeProgressBar = view.findViewById(R.id.upgrade_progress_bar);
         energyValueView = view.findViewById(R.id.energy_value);
         myChickSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        energyValue = myChickSp.getInt(getString(R.string.energy_key),0);
+        SharedPreferences bigSp = getActivity().getSharedPreferences(getString(R.string.bigSp_key),Context.MODE_PRIVATE);
+        energyValue = bigSp.getInt(getString(R.string.energy_key),0);
         energyValueView.setText("动力值："+ energyValue);
         setMyChick();
     }

@@ -14,6 +14,7 @@ import javax.annotation.Nonnull;
 @Entity(tableName = "FocusList")
 public class FocusList implements Serializable {
 
+    @Ignore
     public FocusList(int date, int hour, int minute, int FocusTime,
                      String whatTodo, int notice, int noticeMusic,
                      int noticeInterval, int weekday ,int energyValue,
@@ -35,6 +36,10 @@ public class FocusList implements Serializable {
         this.weekOfYear = weekOfYear;
         this.dayOfMonth = dayOfMonth;
         this.timeRung = timeRung;
+    }
+
+    public FocusList(){
+
     }
 
 

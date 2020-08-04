@@ -4,57 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/big_padding"
     android:orientation="vertical"
+    android:padding="@dimen/big_padding"
     tools:context=".ChronometerActivity">
 
     <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:id="@+id/button_back_chronometer"
-        android:text="返回"
-        android:layout_gravity="top|right"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="top|right"
+        android:text="返回" />
 
-        <TextView
-            android:id="@+id/chronometer_task_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="任务名称"/>
-        <TextView
-            android:id="@+id/chronometer_task_passed_time"
-            android:layout_marginLeft="@dimen/small_padding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
-    </LinearLayout>
+
+    <TextView
+        android:id="@+id/chronometer_task_name"
+        android:layout_width="wrap_content"
+        android:layout_gravity="left"
+        android:layout_height="wrap_content"
+        android:text="任务名称"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp" />
+
 
     <Chronometer
         android:id="@+id/chronometer"
-        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/big_padding"
         android:format="%s"
-        android:textSize="50sp"/>
+        android:textSize="50sp" />
 
     <Button
-        android:layout_marginTop="@dimen/small_padding"
         android:id="@+id/button_start_chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="开始"/>
+        android:layout_marginTop="@dimen/huge_padding"
+        android:text="开始" />
 
     <Button
         android:id="@+id/button_pause_chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="暂停"/>
+        android:text="暂停" />
 
 </LinearLayout>

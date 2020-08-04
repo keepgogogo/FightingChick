@@ -1,6 +1,7 @@
 package com.hackweek.fightingchick;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -57,10 +58,23 @@ public class TodoListFragment extends Fragment {
         addTask = (Button)view.findViewById(R.id.add_task);
         dateTextView = (TextView)view.findViewById(R.id.top_date_todo);
         nickNameTextView = (TextView)view.findViewById(R.id.top_nickname_todo);
-//        //TODO 计时器测试
-//        nickNameTextView.setOnClickListener(new View.OnClickListener(){
-//            FocusList testFocusList = new FocusList(1,)
-//        });
+        //TODO 计时器测试
+        nickNameTextView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                FocusList testFocusList = new FocusList();
+                testFocusList.id=1;
+                testFocusList.FocusTime = 80;
+                testFocusList.energyValue = 30;
+                testFocusList.whatTodo = "ahahahahazjsdfksdofjisoa";
+                Intent intent  = new Intent(getActivity(),ChronometerActivity.class);
+                intent.putExtra(getString(R.string.focusList_to_chronometer),testFocusList);
+                startActivity(intent);
+            }
+
+
+
+        });
         resolutionsTextView = (TextView)view.findViewById(R.id.top_resolutions_todo);
         addTask.setOnClickListener(new View.OnClickListener(){
             @Override
