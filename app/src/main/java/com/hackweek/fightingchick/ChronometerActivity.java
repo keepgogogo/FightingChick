@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hackweek.fightingchick.database.FocusList;
 import com.hackweek.fightingchick.database.FocusListDataBase;
@@ -41,6 +42,15 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
         timeOriginalMin = mFocusList.FocusTime;
         mChronometer = (Chronometer) findViewById(R.id.chronometer);
         mChronometer.setFormat("%s");
+        mChronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                timeWhenStopped = SystemClock.elapsedRealtime()-mChronometer.getBase();
+                timeWhenStoppedMin = (int) timeWhenStopped / (1000 * 60);
+                mFocusList.FocusTime =timeOriginalMin+timeWhenStoppedMin;
+                chronometerTaskName.setText(mFocusList.whatTodo+" 已进行 "+formatFocusHourAndMinute(mFocusList));
+            }
+        });
         buttonBackChronometer = (Button) findViewById(R.id.button_back_chronometer);
         startChronometer = (Button) findViewById(R.id.button_start_chronometer);
         pauseChronometer = (Button) findViewById(R.id.button_pause_chronometer);
@@ -146,14 +156,15 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
     private void saveToRoomAndSp() {
         if (timeWhenStoppedMin!=0) {
             //满20分钟动力值加4
-            //int deltaEnergyValue = 4*(timeWhenStoppedMin/20);
-            //TODO
-            int deltaEnergyValue = 4*(timeWhenStoppedMin/2);
+            int deltaEnergyValue = 4*(timeWhenStoppedMin/20);
             if(deltaEnergyValue!=0){
                 mFocusList.energyValue += deltaEnergyValue;
                 SharedPreferences sp = getSharedPreferences(getString(R.string.bigSp_key),MODE_PRIVATE);
                 int originalEnergy = sp.getInt(getString(R.string.energy_key),0);
                 sp.edit().putInt(getString(R.string.energy_key),originalEnergy+deltaEnergyValue).apply();
+                Toast.makeText(ChronometerActivity.this,"恭喜你，动力值增加了"+ deltaEnergyValue +"!",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ChronometerActivity.this,"时间不足20分钟，动力值没有增加哦~",Toast.LENGTH_SHORT).show();
             }
             FocusListDataBase focusListDataBase = FocusListDataBase.getDatabase(getApplicationContext());
             ThreadHelper mThreadHelper = new ThreadHelper();

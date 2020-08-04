@@ -1,6 +1,7 @@
 package com.hackweek.fightingchick;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Bundle;
@@ -118,24 +119,14 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
                 //用户点击开始记录专注时长按钮后逻辑
                 else if (viewName == ToDoListAdapter.ViewNameInToDo.RECORD_FOCUS_TIME)
                 {
-
+                    FocusList record=adapter.getMData().get(position);
+                    Intent intent = new Intent(mainActivity,ChronometerActivity.class);
+                    intent.putExtra(getString(R.string.focusList_to_chronometer),record);
+                    startActivity(intent);
                 }
             }
         });
 
-
-
-
-
-
-
-
-
-
-//        //TODO 计时器测试
-//        nickNameTextView.setOnClickListener(new View.OnClickListener(){
-//            FocusList testFocusList = new FocusList(1,)
-//        });
         resolutionsTextView = (TextView)view.findViewById(R.id.top_resolutions_todo);
         addTask.setOnClickListener(this);
         // init sp

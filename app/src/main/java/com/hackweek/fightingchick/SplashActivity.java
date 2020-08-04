@@ -38,6 +38,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         checkBox=(CheckBox)findViewById(R.id.agree_privacy);
         button.setOnClickListener(this);
         textView.setOnClickListener(this);
+        checkBox.setOnClickListener(this);
 
         SplashActivitySP = this.getPreferences(Context.MODE_PRIVATE);
         //检查是否有存储的key，没有则创建
@@ -65,6 +66,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             }, SPLASH_TIME_OUT);
         }else{
             //没有确认过
+            button.setBackgroundColor(getColor(R.color.colorGrey));
             checkBox.setChecked(false);
         }
 
@@ -92,6 +94,11 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.privacy_policy:
                 showDialog();
                 break;
+            case R.id.agree_privacy:
+                if(!checkBox.isChecked())
+                    button.setBackgroundColor(getColor(R.color.colorGrey));
+                else
+                    button.setBackgroundColor(getColor(R.color.colorPrimary));
         }
     }
 

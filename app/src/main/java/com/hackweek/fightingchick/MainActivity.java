@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initBottomNavigation();
-        Toast.makeText(getApplicationContext(),DebugDB.getAddressLog().toString(),Toast.LENGTH_LONG).show();
         Fragment todoListFragment = new TodoListFragment();
         setFragment(todoListFragment);
         focusListDataBase = FocusListDataBase.getDatabase(getApplicationContext());
