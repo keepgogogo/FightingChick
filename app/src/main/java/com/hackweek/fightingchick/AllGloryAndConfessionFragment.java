@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.hackweek.fightingchick.database.FocusListDataBase;
 import com.hackweek.fightingchick.database.GloryAndConfessionDao;
@@ -50,7 +51,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
     List<GloryAndConfessionRecord> recordsCopy;
     FragmentHandler handler;
 
-    private SwipeRecyclerView swipeRecyclerView;
+    private RecyclerView swipeRecyclerView;
     private GloryAndConfessionAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private GloryAndConfessionViewModel viewModel;
@@ -78,7 +79,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
         buttonForBack.setOnClickListener(this);
 
         layoutManager=new LinearLayoutManager(getContext());
-        swipeRecyclerView=(SwipeRecyclerView)view.findViewById(R.id.recyclerAllGlory);
+        swipeRecyclerView=(RecyclerView)view.findViewById(R.id.recyclerAllGlory);
         swipeRecyclerView.setHasFixedSize(true);
         swipeRecyclerView.setLayoutManager(layoutManager);
 
@@ -106,7 +107,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                     GloryAndConfessionRecord record=adapter.getMData().get(position);
                     Message message=new Message();
                     message.what=WRITE_GLORY_OR_CONFESSION_FOR_ALARM;
-                    message.obj=record.gloryOrConfession;
+                    message.obj=record.content;
 //                    FragmentHandler handler=new FragmentHandler();
                     handler.sendMessage(message);
                 }
@@ -192,7 +193,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                 case UPDATE_UI:
                     List<GloryAndConfessionRecord> records=(List<GloryAndConfessionRecord>)message.obj;
                     recordsCopy=records;
-                    //buttonForGlory.setTextColor(0xffbfb0b0);
+                    buttonForGlory.setTextColor(0xffbfb0b0);
                     GloryAndConfessionRecordsOperator operator=new GloryAndConfessionRecordsOperator();
                     operator.setRecords(records);
                     records=operator.getGloryRecord();
@@ -218,6 +219,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                     );
 
                     editor.apply();
+                    Toast.makeText(getContext(), "已添加",Toast.LENGTH_SHORT).show();
                     break;
 
                 default:
