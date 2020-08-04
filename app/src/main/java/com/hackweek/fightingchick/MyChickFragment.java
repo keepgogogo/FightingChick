@@ -65,35 +65,35 @@ public class MyChickFragment extends Fragment {
 
     // initialize the name, image and progress bar according to current energy value
     private void setMyChick(){
-        if(energyValue<-50){//拖拉机
-            myChickName.setText("拖拉机");
-//            myChickProfile.setImageResource(); TODO
+        if(energyValue<-50){//拖拉鸡
+            myChickName.setText("拖拉鸡");
+            myChickProfile.setImageResource(R.mipmap.tuolaji);
             if(energyValue>-100){
                 upgradeProgressBar.setProgress(calculateProgress(-100,-50));
             }else upgradeProgressBar.setProgress(0);
         }else if(energyValue<0){//落汤鸡
             myChickName.setText("落汤鸡");
-//            myChickProfile.setImageResource();
+            myChickProfile.setImageResource(R.mipmap.luotangji);
             upgradeProgressBar.setProgress(calculateProgress(-50,0));
         }else if(energyValue<20){//白切鸡
             myChickName.setText("白切鸡");
-//            myChickProfile.setImageResource();
+            myChickProfile.setImageResource(R.mipmap.baiqieji);
             upgradeProgressBar.setProgress(calculateProgress(0,20));
         }else if(energyValue<50){//跑步鸡
             myChickName.setText("跑步鸡");
-//            myChickProfile.setImageResource();
+            myChickProfile.setImageResource(R.mipmap.paobuji);
             upgradeProgressBar.setProgress(calculateProgress(20,50));
         }else if(energyValue<80){//滑翔鸡
             myChickName.setText("滑翔鸡");
-//            myChickProfile.setImageResource();
+            myChickProfile.setImageResource(R.mipmap.huaxiangji);
             upgradeProgressBar.setProgress(calculateProgress(50,80));
         }else if(energyValue<100){//战斗鸡
             myChickName.setText("战斗鸡");
-//            myChickProfile.setImageResource();
+            myChickProfile.setImageResource(R.mipmap.zhandouji);
             upgradeProgressBar.setProgress(calculateProgress(80,100));
         }else{//永动鸡
             myChickName.setText("永动鸡");
-//            myChickProfile.setImageResource();
+            myChickProfile.setImageResource(R.mipmap.yongdongji);
         }
     }
 }

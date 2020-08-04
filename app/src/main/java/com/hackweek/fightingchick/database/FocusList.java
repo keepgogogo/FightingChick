@@ -1,5 +1,6 @@
 package com.hackweek.fightingchick.database;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -8,12 +9,16 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
 @Entity(tableName = "FocusList")
 public class FocusList implements Serializable {
 
     public FocusList(int date, int hour, int minute, int FocusTime,
                      String whatTodo, int notice, int noticeMusic,
-                     int noticeInterval, int weekday ,int energyValue) {
+                     int noticeInterval, int weekday ,int energyValue,
+                     int year,int month,int weekOfYear,int dayOfMonth,
+                     int timeRung) {
         this.date = date;
         this.hour = hour;
         this.minute = minute;
@@ -25,7 +30,13 @@ public class FocusList implements Serializable {
         this.weekday = weekday;
         this.identifier = UUID.randomUUID().toString();
         this.energyValue = energyValue;
+        this.year=year;
+        this.month=month;
+        this.weekOfYear = weekOfYear;
+        this.dayOfMonth = dayOfMonth;
+        this.timeRung = timeRung;
     }
+
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -64,8 +75,27 @@ public class FocusList implements Serializable {
 
     //save the UUID for alarm intent use
     @ColumnInfo
+    @Nonnull
     public String identifier;
 
     @ColumnInfo
     public int energyValue;
+
+    @ColumnInfo
+    public int year;
+
+    @ColumnInfo
+    public int month;
+
+
+    @ColumnInfo
+    public int weekOfYear;
+
+
+    @ColumnInfo
+    public int dayOfMonth;
+
+    @ColumnInfo
+    public int timeRung;//响铃几次
+
 }

@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.hackweek.fightingchick.database.FocusList;
+
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
@@ -55,6 +57,10 @@ public class TodoListFragment extends Fragment {
         addTask = (Button)view.findViewById(R.id.add_task);
         dateTextView = (TextView)view.findViewById(R.id.top_date_todo);
         nickNameTextView = (TextView)view.findViewById(R.id.top_nickname_todo);
+//        //TODO 计时器测试
+//        nickNameTextView.setOnClickListener(new View.OnClickListener(){
+//            FocusList testFocusList = new FocusList(1,)
+//        });
         resolutionsTextView = (TextView)view.findViewById(R.id.top_resolutions_todo);
         addTask.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -178,4 +178,8 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
         stringBuilder.insert(2, focusMinute);
         return stringBuilder.toString();
     }
+
+    private void updateEnergyValueInSp(){
+
+    }
 }

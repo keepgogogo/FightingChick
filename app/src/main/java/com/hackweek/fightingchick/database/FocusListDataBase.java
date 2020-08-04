@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {FocusList.class},version = 1,exportSchema = false)
+@Database(entities = {FocusList.class},version = 4,exportSchema = false)
 public abstract class FocusListDataBase extends RoomDatabase {
     public abstract FocusListDao FocusListDao();
     private static volatile FocusListDataBase INSTANCE;//volatile保证从内存读写，各线程中获取的database实例相同
@@ -27,6 +27,7 @@ public abstract class FocusListDataBase extends RoomDatabase {
                             "FocusDataBase")
                             .addMigrations(MIGRATION_1_2)
                             .addMigrations(MIGRATION_2_3)
+                            .addMigrations(MIGRATION_3_4)
                             .build();
                 }
             }
@@ -44,7 +45,19 @@ public abstract class FocusListDataBase extends RoomDatabase {
    static final Migration MIGRATION_2_3 = new Migration(2,3) {
        @Override
        public void migrate(@NonNull SupportSQLiteDatabase database) {
-           database.execSQL("ALTER TABLE FocusList ADD COLUMN energyValue NOT NULL");
+           database.execSQL("ALTER TABLE FocusList ADD COLUMN energyValue");
        }
-   }
+   };
+
+    static final Migration MIGRATION_3_4 = new Migration(3,4) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE FocusList ADD COLUMN year ");
+            database.execSQL("ALTER TABLE FocusList ADD COLUMN month ");
+            database.execSQL("ALTER TABLE FocusList ADD COLUMN weekOfYear");
+            database.execSQL("ALTER TABLE FocusList ADD COLUMN dayOfMonth ");
+            database.execSQL("ALTER TABLE FocusList ADD COLUMN timeRung");
+        }
+    };
+
 }
