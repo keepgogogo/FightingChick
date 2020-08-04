@@ -19,7 +19,7 @@ public interface FocusListDao {
     List<FocusList> loadAll();
 
     @Update
-    void update(FocusList... focusLists);
+    void update(FocusList ... focusLists);
 
     @Delete
     void delete(FocusList ... focusLists);
