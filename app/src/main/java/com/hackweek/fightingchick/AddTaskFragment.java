@@ -234,7 +234,7 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener, R
                 // save using Room
                 FocusList newFocusList = new FocusList(newDate,
                         newHour, newMinute, 0, newWhatTodo,
-                        noticeMethod, newRing, newInterval, newDayOfWeek);
+                        noticeMethod, newRing, newInterval, newDayOfWeek,0);
                 ThreadHelper newThreadHelper = new ThreadHelper();
                 newThreadHelper.insertFocusList(FocusListDataBase.getDatabase(mainActivity), newFocusList);
                 Toast.makeText(getContext(),"保存成功",Toast.LENGTH_SHORT).show();

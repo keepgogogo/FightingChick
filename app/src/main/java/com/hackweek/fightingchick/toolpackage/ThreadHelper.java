@@ -47,6 +47,17 @@ public class ThreadHelper implements ThreadHelperInterface{
         });
     }
 
+    public void updateFocusList(FocusListDataBase dataBase, FocusList... focusLists)
+    {
+        thread.execute(new Runnable() {
+            @Override
+            public void run() {
+                FocusListDao focusListDao = dataBase.FocusListDao();
+                focusListDao.update(focusLists);
+            }
+        });
+    }
+
     public void deleteFocusList(FocusListDataBase dataBase, FocusList ... focusLists)
     {
         thread.execute(new Runnable() {

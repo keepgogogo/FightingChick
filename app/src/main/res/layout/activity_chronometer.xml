@@ -31,7 +31,6 @@
             android:layout_marginLeft="@dimen/small_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="已进行00时00分"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
     </LinearLayout>
 
@@ -40,6 +39,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:format="%s"
         android:textSize="50sp"/>
 
     <Button

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.amitshekhar.DebugDB;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hackweek.fightingchick.database.FocusList;
 import com.hackweek.fightingchick.database.FocusListDataBase;
 import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
 
@@ -100,29 +101,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**看不懂的废弃方法
-    public void setFragmentPosition(int position) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Fragment currentFragment = mFragments.get(position);
-        Fragment lastFragment = mFragments.get(lastIndex);
-        lastIndex = position;
-        //if(lastFragment.isVisible())
-            //ft.hide(lastFragment);
-        if (!currentFragment.isAdded()) {
-            getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();//只保留一份该碎片的实例
-            //ft.replace(R.id.frame_for_fragment, currentFragment);
-        }
-        ft.replace(R.id.frame_for_fragment, currentFragment);
-        //ft.show(currentFragment);
-        ft.commitAllowingStateLoss();
-    }
-
-    private void setupViews(){
-        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.fragNavHost);
-        navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController((BottomNavigationView) findViewById(R.id.bottomNavView),navHostFragment.getNavController());
-    }
-     **/
 
     /**
      * 改变fragment中物理返回键的点击事件，防止返回直接退出app
@@ -143,5 +121,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean isInterception(){return inInterception;}
+
+    /**看不懂的废弃方法
+     public void setFragmentPosition(int position) {
+     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+     Fragment currentFragment = mFragments.get(position);
+     Fragment lastFragment = mFragments.get(lastIndex);
+     lastIndex = position;
+     //if(lastFragment.isVisible())
+     //ft.hide(lastFragment);
+     if (!currentFragment.isAdded()) {
+     getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();//只保留一份该碎片的实例
+     //ft.replace(R.id.frame_for_fragment, currentFragment);
+     }
+     ft.replace(R.id.frame_for_fragment, currentFragment);
+     //ft.show(currentFragment);
+     ft.commitAllowingStateLoss();
+     }
+
+     private void setupViews(){
+     NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.fragNavHost);
+     navController = navHostFragment.getNavController();
+     NavigationUI.setupWithNavController((BottomNavigationView) findViewById(R.id.bottomNavView),navHostFragment.getNavController());
+     }
+     **/
 
 }

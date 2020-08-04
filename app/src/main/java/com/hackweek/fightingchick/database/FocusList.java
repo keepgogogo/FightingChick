@@ -13,7 +13,7 @@ public class FocusList implements Serializable {
 
     public FocusList(int date, int hour, int minute, int FocusTime,
                      String whatTodo, int notice, int noticeMusic,
-                     int noticeInterval, int weekday) {
+                     int noticeInterval, int weekday ,int energyValue) {
         this.date = date;
         this.hour = hour;
         this.minute = minute;
@@ -24,6 +24,7 @@ public class FocusList implements Serializable {
         this.noticeInterval = noticeInterval;
         this.weekday = weekday;
         this.identifier = UUID.randomUUID().toString();
+        this.energyValue = energyValue;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -64,4 +65,7 @@ public class FocusList implements Serializable {
     //save the UUID for alarm intent use
     @ColumnInfo
     public String identifier;
+
+    @ColumnInfo
+    public int energyValue;
 }

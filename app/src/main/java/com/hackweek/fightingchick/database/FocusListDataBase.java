@@ -26,6 +26,7 @@ public abstract class FocusListDataBase extends RoomDatabase {
                             FocusListDataBase.class,
                             "FocusDataBase")
                             .addMigrations(MIGRATION_1_2)
+                            .addMigrations(MIGRATION_2_3)
                             .build();
                 }
             }
@@ -39,4 +40,11 @@ public abstract class FocusListDataBase extends RoomDatabase {
             database.execSQL("ALTER TABLE FocusList ADD COLUMN identifier NOT NULL");
         }
     };
+
+   static final Migration MIGRATION_2_3 = new Migration(2,3) {
+       @Override
+       public void migrate(@NonNull SupportSQLiteDatabase database) {
+           database.execSQL("ALTER TABLE FocusList ADD COLUMN energyValue NOT NULL");
+       }
+   }
 }
