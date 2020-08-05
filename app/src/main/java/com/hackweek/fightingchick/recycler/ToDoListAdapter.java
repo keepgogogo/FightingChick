@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
     implements View.OnClickListener {
 
     private List<FocusList> mData;
+    private ToDoListViewHolder viewHolder;
+
 
     public void setMData(List<FocusList> mData) {
         this.mData = mData;
@@ -43,13 +46,26 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
     @Override
     public void onBindViewHolder(ToDoListViewHolder holder,int position)
     {
-        holder.whatToDoTextView.setText(mData.get(position).whatTodo);
+
+        holder.whatToDoTextView.setText(getTextFromData(mData.get(position)));
 
         isPlanMissed(mData.get(position),holder.incompleteText,holder.checkBox);
 
         holder.startFocus.setTag(position);
         holder.setEveryDayPlan.setTag(position);
         holder.deleteButton.setTag(position);
+        if (mData.get(position).FocusTime==-1)holder.startFocus.setVisibility(View.INVISIBLE);
+    }
+
+    public String getTextFromData(FocusList list)
+    {
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append(list.hour);
+        stringBuilder.append(":");
+        stringBuilder.append(list.minute);
+        stringBuilder.append("  ");
+        stringBuilder.append(list.whatTodo);
+        return stringBuilder.toString();
     }
 
 
@@ -104,6 +120,7 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
             startFocus.setOnClickListener(ToDoListAdapter.this);
             setEveryDayPlan.setOnClickListener(ToDoListAdapter.this);
             deleteButton.setOnClickListener(ToDoListAdapter.this);
+            viewHolder=ToDoListViewHolder.this;
         }
     }
 
@@ -133,7 +150,17 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
                     clickListenerToDo.onClick(view,ViewNameInToDo.RECORD_FOCUS_TIME,position);
                     break;
                 case R.id.ButtonForSetEveryDayPlan_todo:
+                    if (mData.get(position).isEveryDayTask)
+                    {
+                        viewHolder.setEveryDayPlan.setText("设为每日待办");
+                        viewHolder.setEveryDayPlan.setTypeface(null, Typeface.NORMAL);
+                    }
+                    else {
+                        viewHolder.setEveryDayPlan.setText("已设为每日待办");
+                        viewHolder.setEveryDayPlan.setTypeface(null, Typeface.BOLD);
+                    }
                     clickListenerToDo.onClick(view,ViewNameInToDo.SET_AS_EVERYDAY_PLAN,position);
+
                     break;
                 default:
                     break;

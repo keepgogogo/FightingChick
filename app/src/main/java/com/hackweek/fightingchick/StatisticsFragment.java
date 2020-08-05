@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Handler;
 import android.os.Message;
 
+import android.os.ParcelUuid;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,8 @@ public class StatisticsFragment extends Fragment {
 
     final String TAG="StatisticsFragment";
     public final static int RECEIVE_TODAY_FOCUS_LIST=555;
+    public final static int RECEIVE_WEEK_FOCUS_LIST=556;
+    public final static int RECEIVE_MONTH_FOCUS_LIST=557;
 
     private MainActivity mainActivity;
     private FocusListDataBase focusListDataBase;
@@ -54,7 +57,14 @@ public class StatisticsFragment extends Fragment {
     private TextView textViewTodayTotalFocusTime;
     private TextView textViewComplete;
     private TextView textViewIncomplete;
-
+    private TextView textViewWeekTotalPower;
+    private TextView textViewWeekFocusTime;
+    private TextView textViewWeekCompletionRate;
+    private TextView textViewMonthTotalPower;
+    private TextView textViewMonthFocusTime;
+    private TextView textViewMonthCompletionRate;
+    private TextView textViewWeekTotalPlan;
+    private TextView textViewMonthTotalPlan;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -70,6 +80,16 @@ public class StatisticsFragment extends Fragment {
         textViewTodayTotalPower=(TextView)view.findViewById(R.id.TextView_TodayTotalPower);
         textViewComplete=(TextView)view.findViewById(R.id.TextViewForCompleteStatistics);
         textViewIncomplete=(TextView)view.findViewById(R.id.TextViewForIncompleteStatistics);
+        textViewWeekCompletionRate=(TextView)view.findViewById(R.id.TextView_WeekCompletionRate);
+        textViewWeekTotalPower=(TextView)view.findViewById(R.id.TextView_WeekTotalPower);
+        textViewWeekFocusTime=(TextView)view.findViewById(R.id.TextView_WeekTotalFocusTime);
+        textViewMonthCompletionRate=(TextView)view.findViewById(R.id.TextView_MonthCompletionRate);
+        textViewMonthTotalPower=(TextView)view.findViewById(R.id.TextView_MonthTotalPower);
+        textViewMonthFocusTime=(TextView)view.findViewById(R.id.TextView_MonthTotalFocusTime);
+        textViewMonthTotalPlan=(TextView)view.findViewById(R.id.TextView_MonthTotalPlan);
+        textViewWeekTotalPlan=(TextView)view.findViewById(R.id.TextView_WeekTotalPlan);
+
+
 
 
         preferences=mainActivity.getPreferences(Context.MODE_PRIVATE);
@@ -81,6 +101,7 @@ public class StatisticsFragment extends Fragment {
         threadHelper=new ThreadHelper();
 
         threadHelper.loadTodayForStatisticsFragment(handler,focusListDao);
+
     }
 
     public boolean isCompleted(FocusList focusList)
@@ -89,22 +110,23 @@ public class StatisticsFragment extends Fragment {
     }
 
     public class StatisticsFragmentHandler extends Handler{
-
+        List<FocusList> lists;
+        StringBuilder stringBuilder=new StringBuilder();
         @Override
         public void handleMessage(Message message)
         {
+            if(lists!=null)lists.clear();
+            stringBuilder.delete(0,stringBuilder.length());
             switch (message.what)
             {
                 case RECEIVE_TODAY_FOCUS_LIST:
                     Description description=new Description();
                     description.setText("");
+                    lists=(List<FocusList>)message.obj;
 
-
-
-                    List<FocusList> lists=(List<FocusList>)message.obj;
-
-
-                    StringBuilder stringBuilder=new StringBuilder(textViewTodayCompletionRate.getText());
+//                    lists.get(0).FocusTime=120;
+//                    lists.get(1).FocusTime=12;
+                    stringBuilder=new StringBuilder(textViewTodayCompletionRate.getText());
                     stringBuilder.append(getDayCompletionRate(lists));
                     textViewTodayCompletionRate.setText(stringBuilder.toString());
 
@@ -146,7 +168,59 @@ public class StatisticsFragment extends Fragment {
                     String[] data=getFormatDetailString(lists);
                     textViewComplete.setText(data[0]);
                     textViewIncomplete.setText(data[1]);
+                    threadHelper.loadWeekForStatisticsFragment(handler,focusListDao);
                     break;
+
+                case RECEIVE_WEEK_FOCUS_LIST:
+                    lists=(List<FocusList>)message.obj;
+
+                    stringBuilder=new StringBuilder(textViewWeekCompletionRate.getText());
+                    stringBuilder.append(getDayCompletionRate(lists));
+                    textViewWeekCompletionRate.setText(stringBuilder.toString());
+
+                    stringBuilder.delete(0,stringBuilder.length());
+                    stringBuilder.append(textViewWeekTotalPlan.getText());
+                    stringBuilder.append(lists.size());
+                    textViewWeekTotalPlan.setText(stringBuilder.toString());
+
+
+                    stringBuilder.delete(0,stringBuilder.length());
+                    stringBuilder.append(textViewWeekTotalPower.getText());
+                    stringBuilder.append(getTotalPower(lists));
+                    textViewWeekTotalPower.setText(stringBuilder.toString());
+
+                    stringBuilder.delete(0,stringBuilder.length());
+                    stringBuilder.append(textViewWeekFocusTime.getText());
+                    stringBuilder.append(getTotalFocusTime(lists));
+                    textViewWeekFocusTime.setText(stringBuilder.toString());
+                    threadHelper.loadMonthForStatisticsFragment(handler,focusListDao);
+                    break;
+
+                case RECEIVE_MONTH_FOCUS_LIST:
+                    lists=(List<FocusList>)message.obj;
+
+                    stringBuilder=new StringBuilder(textViewMonthCompletionRate.getText());
+                    stringBuilder.append(getDayCompletionRate(lists));
+                    textViewMonthCompletionRate.setText(stringBuilder.toString());
+
+
+                    stringBuilder.delete(0,stringBuilder.length());
+                    stringBuilder.append(textViewMonthTotalPlan.getText());
+                    stringBuilder.append(lists.size());
+                    textViewMonthTotalPlan.setText(stringBuilder.toString());
+
+
+                    stringBuilder.delete(0,stringBuilder.length());
+                    stringBuilder.append(textViewMonthTotalPower.getText());
+                    stringBuilder.append(getTotalPower(lists));
+                    textViewMonthTotalPower.setText(stringBuilder.toString());
+
+                    stringBuilder.delete(0,stringBuilder.length());
+                    stringBuilder.append(textViewMonthFocusTime.getText());
+                    stringBuilder.append(getTotalFocusTime(lists));
+                    textViewMonthFocusTime.setText(stringBuilder.toString());
+                    break;
+
 
             }
         }
@@ -177,7 +251,15 @@ public class StatisticsFragment extends Fragment {
         double i=0;
         for(FocusList temp : lists)
         {
-            if(isCompleted(temp))i++;
+            if (temp.FocusTime!=-1)
+            {
+                if(isCompleted(temp))i++;
+            }
+            else
+            {
+                if (temp.status==2 || temp.status==1)i++;
+            }
+
         }
         double x=(i/lists.size());
         x*=100;

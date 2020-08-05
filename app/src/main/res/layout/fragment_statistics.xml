@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="今日"
+            android:textStyle="bold"
             android:id="@+id/Today_TextView"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
@@ -62,7 +63,8 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:id="@+id/BarChartForToday"/>
+                android:id="@+id/BarChartForToday"
+                android:clickable="false"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -91,6 +93,112 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="本周"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            />
+
+            <TextView
+                android:id="@+id/TextView_WeekTotalPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+
+                android:text="总任务数:"
+                />
+
+        <TextView
+            android:id="@+id/TextView_WeekTotalPower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+
+            android:text="获得总动力值: "
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务完成率: "
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/TextView_WeekCompletionRate"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总专注时长: "
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/TextView_WeekTotalFocusTime"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="本月"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        />
+
+        <TextView
+            android:id="@+id/TextView_MonthTotalPlan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+
+            android:text="总任务数:"
+            />
+
+
+        <TextView
+        android:id="@+id/TextView_MonthTotalPower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+
+        android:text="获得总动力值: "
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="任务完成率: "
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/TextView_MonthCompletionRate"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="总专注时长: "
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:id="@+id/TextView_MonthTotalFocusTime"/>
+
+    </LinearLayout>
 
 
 

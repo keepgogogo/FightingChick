@@ -112,4 +112,37 @@ public class ThreadHelper implements ThreadHelperInterface{
         });
     }
 
+    public void loadWeekForStatisticsFragment(StatisticsFragment.StatisticsFragmentHandler handler,FocusListDao dao)
+    {
+        thread.execute(new Runnable() {
+            @Override
+            public void run() {
+                Calendar currentCalendar = Calendar.getInstance();
+                int year=currentCalendar.get(Calendar.YEAR);
+                int week=currentCalendar.get(Calendar.WEEK_OF_YEAR);
+                Message message=new Message();
+                message.obj=dao.getLastWeekEnergyWeekday(year,week);
+                message.what=StatisticsFragment.RECEIVE_WEEK_FOCUS_LIST;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+    public void loadMonthForStatisticsFragment(StatisticsFragment.StatisticsFragmentHandler handler,FocusListDao dao)
+    {
+        thread.execute(new Runnable() {
+            @Override
+            public void run() {
+                Calendar currentCalendar = Calendar.getInstance();
+                int year=currentCalendar.get(Calendar.YEAR);
+                int month=currentCalendar.get(Calendar.MONTH)+1;
+                Message message=new Message();
+                message.obj=dao.getLastMonthEnergyDayOfMonth(year,month);
+                message.what=StatisticsFragment.RECEIVE_MONTH_FOCUS_LIST;
+                handler.sendMessage(message);
+            }
+        });
+    }
+
+
 }
