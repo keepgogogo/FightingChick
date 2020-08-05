@@ -79,6 +79,7 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
                     case 0: //stop
                         stopChro();
                         backToMain();
+                        finish();
                         break;
                     case 1: // continue
                         startChro();
@@ -115,6 +116,7 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
                     case 1: // stop
                         stopChro();
                         backToMain();
+                        finish();
                         break;
                 }
             }
@@ -130,6 +132,7 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
             stopChro();
         else
             saveToRoomAndSp();
+        super.finish();
     }
 
     @Override
@@ -141,6 +144,7 @@ public class ChronometerActivity extends AppCompatActivity implements View.OnCli
                 else
                     saveToRoomAndSp();
                 backToMain();
+                finish();
                 break;
             case R.id.button_pause_chronometer:
                 pauseChro();

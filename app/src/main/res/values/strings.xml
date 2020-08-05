@@ -5,10 +5,14 @@
     <string name="privacy_policy">用户协议和隐私条款...TODO!!</string><!--TODO-->
     <string name="privacy_policy_agreed">已同意<u>用户协议与隐私条例</u></string>
     <string name="channel_name">Notification channel for FightingChick</string>
-    <string name="channel_description">Notification channel for FightingChick without descriptions</string>
+    <string name="channel_description">永动鸡的通知渠道</string>
     <string name="channel_id">ThisIsDefinitelyAUniqueId</string>
     <string name="add_notification"><u>应用到闹钟提示界面</u></string>
     <string name="focusList_to_chronometer">送给计时器的任务</string>
+    <string name="focusList_to_reminder">送给闹钟提示界面</string>
+    <string name="focusList_to_main">送给主活动的任务</string>
+    <string name="focusList_to_notification">送给通知的任务</string>
+    <string name="focusList_to_delete_notification">送给删除的任务</string>
     <string name="bigSp_key">获取全局的sp</string>
     <!-- 以下为SharedPreferences中的键 -->
     <string name="saved_agreed_key">已通过用户协议</string>

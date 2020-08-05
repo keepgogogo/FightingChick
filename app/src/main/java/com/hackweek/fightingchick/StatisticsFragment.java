@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Message;
-import android.security.identity.EphemeralPublicKeyNotFoundException;
+//import android.security.identity.EphemeralPublicKeyNotFoundException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -8,6 +8,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,11 +30,16 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
     private TextView textView;
     private final int SPLASH_TIME_OUT=200;
     private SharedPreferences SplashActivitySP;
+    private static final String[] musicNames={"deepeast","linglingling","qingshixiang","lullatone","gongji","xiaoji","yaogunji","kuaileji"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        for(int i=0;i<8;i++){
+            createNotificationChannel(musicNames[i]);
+        }
+        createNotificationChannel();
         button = (Button)findViewById(R.id.enter);
         textView=(TextView)findViewById(R.id.privacy_policy);
         checkBox=(CheckBox)findViewById(R.id.agree_privacy);
@@ -108,20 +115,52 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         dialog.setContentView(view);
         dialog.show();
     }
-
-    private void createNotificationChannel() {
+    //Vibrate only
+    private void createNotificationChannel(){
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
-            String id = getString(R.string.channel_id);
+            int importance = NotificationManager.IMPORTANCE_LOW;//TODO perhaps wrong
+            NotificationChannel channel = new NotificationChannel("vibrate", name, importance);
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setShowBadge(true);
+            channel.setLockscreenVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+            if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.Q){
+                channel.setAllowBubbles(true);
+            }
+
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[]{100,200,200,200,300,400,200,100});
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+
+
+    private void createNotificationChannel(String id) {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
             int importance = NotificationManager.IMPORTANCE_HIGH;
+            Uri uri = Uri.parse("android.resource://"+getPackageName()+"/raw/"+id);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build();
             NotificationChannel channel = new NotificationChannel(id, name, importance);
             channel.setDescription(description);
             channel.enableLights(true);
             channel.setShowBadge(true);
             channel.setLockscreenVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+            channel.setSound(uri,audioAttributes);
             if(Build.VERSION.SDK_INT >=Build.VERSION_CODES.Q){
                 channel.setAllowBubbles(true);
             }

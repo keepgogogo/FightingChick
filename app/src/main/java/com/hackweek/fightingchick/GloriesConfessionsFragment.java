@@ -45,7 +45,7 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainActivity = (MainActivity)getActivity();
+
 
     }
 
@@ -67,8 +67,9 @@ public class GloriesConfessionsFragment extends Fragment implements View.OnClick
         notificationConfessions.setOnClickListener(this);
         saveGlories.setOnClickListener(this);
         saveConfessions.setOnClickListener(this);
+        mainActivity = (MainActivity)getActivity();
         //init SP
-        gloriesConfessionsSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
+        gloriesConfessionsSp = mainActivity.getSharedPreferences(getString(R.string.bigSp_key),Context.MODE_PRIVATE);
         gloriesConfessionsSpEditor = gloriesConfessionsSp.edit();
 
     }

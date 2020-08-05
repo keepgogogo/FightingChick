@@ -66,11 +66,8 @@ public class FocusList implements Serializable {
     @ColumnInfo
     public int notice;
 
-    //noticeMusic = 1 音乐为 温和鸡
-    //noticeMusic = 2 音乐为 暴躁鸡
-    //noticeMusic = 3 音乐为 快乐鸡
-    //noticeMusic = 4 音乐为 尖叫鸡
     @ColumnInfo
+    @Nonnull
     public int noticeMusic;
 
     @ColumnInfo

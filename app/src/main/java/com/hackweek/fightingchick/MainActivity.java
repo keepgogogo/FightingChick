@@ -10,11 +10,17 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 import androidx.room.migration.Migration;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -30,12 +36,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
+    public static final String CHANGE_OCCURRED="com.hackweek.fightingchick.changeoccurred";
+    public static final String TODOUUID="com.hackweek.fightingchick.todouuid";
 
     final int TRANSFER_DATABASE_TO_MINE_FRAGMENT=566;
 
     private BottomNavigationView mBottomNavigationView;
     public FocusListDataBase focusListDataBase;
     public GloryAndConfessionDataBase gloryAndConfessionDataBase;
+    private SharedPreferences mainSp;
+    private FocusList focusList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +56,12 @@ public class MainActivity extends AppCompatActivity {
         setFragment(todoListFragment);
         focusListDataBase = FocusListDataBase.getDatabase(getApplicationContext());
         gloryAndConfessionDataBase = GloryAndConfessionDataBase.getDataBase(getApplicationContext());
-
-//        focusListDataBase= Room.databaseBuilder(getApplicationContext(), FocusListDataBase.class,
-//         "FocusDataBase").build();
-//        gloryAndConfessionDataBase=Room.databaseBuilder(getApplicationContext(), GloryAndConfessionDataBase.class,
-//                "GloryAndConfessionDataBase").build();
+        mainSp = getSharedPreferences(getString(R.string.bigSp_key),MODE_PRIVATE);
+        if(mainSp.getBoolean(CHANGE_OCCURRED,false)){//新增几分钟后的闹钟
+            mainSp.edit().putBoolean(CHANGE_OCCURRED,false);
+            focusList=(FocusList)getIntent().getSerializableExtra(getString(R.string.focusList_to_main));
+            //TODO create alarm
+        }
     }
 
     public void initBottomNavigation() {
@@ -117,6 +129,33 @@ public class MainActivity extends AppCompatActivity {
     public void setAllGloryFragmentBackListener(AllGloryAndConfessionFragment.AllGloryFragmentBackListener backListener)
     {
         this.allGloryFragmentBackListener=backListener;
+    }
+
+    private AlarmManager getAlarmManager() {
+        return (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    }
+
+    public void createAlarm(Intent i, int requestCode, long timeInMillis) {
+        AlarmManager am = getAlarmManager();
+        PendingIntent pi = PendingIntent.getService(MainActivity.this, requestCode, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.set(AlarmManager.RTC_WAKEUP, timeInMillis, pi);
+        //am.setRepeating(AlarmManager.RTC_WAKEUP,timeInMillis,);
+        Log.d(TAG, "createAlarm " + requestCode + " time: " + timeInMillis + " PI " + pi.toString());
+    }
+
+    public boolean doesPendingIntentExist(Intent i, int requestCode) {
+        PendingIntent pi = PendingIntent.getService(MainActivity.this, requestCode, i, PendingIntent.FLAG_NO_CREATE);
+        return pi != null;
+    }
+
+
+    public void deleteAlarm(Intent i, int requestCode) {
+        if (doesPendingIntentExist(i, requestCode)) {
+            PendingIntent pi = PendingIntent.getService(MainActivity.this, requestCode, i, PendingIntent.FLAG_NO_CREATE);
+            pi.cancel();
+            getAlarmManager().cancel(pi);
+            Log.d(TAG, "PI Cancelled " + doesPendingIntentExist(i, requestCode));
+        }
     }
 
     public boolean isInterception(){return inInterception;}

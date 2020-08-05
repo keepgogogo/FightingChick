@@ -8,20 +8,27 @@
     android:orientation="vertical"
     tools:context=".AddTaskFragment">
 
-    <Button
-        android:id="@+id/cancel_add_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:text="返回" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancel_add_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="返回" />
 
 
-    <TimePicker
-        android:id="@+id/new_task_timepicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:timePickerMode="spinner" />
+        <TimePicker
+            android:id="@+id/new_task_timepicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:timePickerMode="spinner" />
+    </FrameLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,37 +74,76 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:checkedButton="@+id/radio_mild_ring"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/radio_deepeast">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@id/radio_deepeast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="deepeast"
+            android:visibility="invisible" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_linglingling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="铃铃铃"
+            android:visibility="invisible" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_qingshixiang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="青石巷"
+            android:visibility="invisible" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_lullatone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lullatone"
+            android:visibility="invisible" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/choose_ring_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:orientation="horizontal">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@id/radio_mild_ring"
+            android:id="@+id/radio_gongji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="温和鸡"
+            android:text="公鸡"
             android:visibility="invisible" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radio_crazy_ring"
+            android:id="@+id/radio_xiaoji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="暴躁鸡"
+            android:text="小鸡"
             android:visibility="invisible" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radio_happy_ring"
+            android:id="@+id/radio_yaogunji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="摇滚鸡"
+            android:visibility="invisible" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/radio_kuaileji"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="快乐鸡"
             android:visibility="invisible" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/radio_scream_ring"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="尖叫鸡"
-            android:visibility="invisible" />
     </RadioGroup>
+
 
     <TextView
         android:layout_width="wrap_content"

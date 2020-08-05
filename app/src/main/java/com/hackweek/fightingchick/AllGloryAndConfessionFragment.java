@@ -204,7 +204,7 @@ public class AllGloryAndConfessionFragment extends Fragment implements View.OnCl
                 case WRITE_GLORY_OR_CONFESSION_FOR_ALARM:
                     String content=(String)message.obj;
                     MainActivity mainActivity = (MainActivity)getActivity();
-                    SharedPreferences sp = mainActivity.getPreferences(Context.MODE_PRIVATE);
+                    SharedPreferences sp = mainActivity.getSharedPreferences(getString(R.string.bigSp_key),Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor= sp.edit();
                     //把sp中的2号光荣/忏悔挪到3,1挪到2,空出1留给最新的
                     editor.putString(
