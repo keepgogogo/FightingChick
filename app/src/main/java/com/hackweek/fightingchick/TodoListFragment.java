@@ -71,6 +71,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
         focusListDataBase=FocusListDataBase.getDatabase(mainActivity);
         focusListDao=focusListDataBase.FocusListDao();
         handler=new ToDoListFragmentHandler();
+        threadHelper=new ThreadHelper();
 
 
         addTask = (Button)view.findViewById(R.id.add_task);
