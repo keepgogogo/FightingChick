@@ -18,6 +18,7 @@ public interface FocusListDao {
     @Query("SELECT * FROM focuslist")
     List<FocusList> loadAll();
 
+
     @Update
     void update(FocusList ... focusLists);
 

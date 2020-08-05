@@ -238,7 +238,8 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener, R
                         currentCalendar.get(Calendar.YEAR),
                         currentCalendar.get(Calendar.MONTH),
                         currentCalendar.get(Calendar.WEEK_OF_YEAR),
-                        currentCalendar.get(Calendar.DAY_OF_MONTH),0);
+                        currentCalendar.get(Calendar.DAY_OF_MONTH),0,
+                        0,false);
                 ThreadHelper newThreadHelper = new ThreadHelper();
                 newThreadHelper.insertFocusList(FocusListDataBase.getDatabase(mainActivity), newFocusList);
                 Toast.makeText(getContext(),"保存成功",Toast.LENGTH_SHORT).show();

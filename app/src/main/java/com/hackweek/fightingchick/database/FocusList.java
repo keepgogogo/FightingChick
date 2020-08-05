@@ -19,7 +19,7 @@ public class FocusList implements Serializable {
                      String whatTodo, int notice, int noticeMusic,
                      int noticeInterval, int weekday ,int energyValue,
                      int year,int month,int weekOfYear,int dayOfMonth,
-                     int timeRung) {
+                     int timeRung , int status, boolean isEveryDayTask) {
         this.date = date;
         this.hour = hour;
         this.minute = minute;
@@ -36,6 +36,8 @@ public class FocusList implements Serializable {
         this.weekOfYear = weekOfYear;
         this.dayOfMonth = dayOfMonth;
         this.timeRung = timeRung;
+        this.status = status;
+        this.isEveryDayTask = isEveryDayTask;
     }
 
     public FocusList(){
@@ -102,5 +104,13 @@ public class FocusList implements Serializable {
 
     @ColumnInfo
     public int timeRung;//响铃几次
+
+    // 0 时间不到 1 来了就是干 2 一会再响 3 有事不完成 4 犯懒不完成
+    @ColumnInfo
+    public int status;
+
+    // true 每日待办
+    @ColumnInfo
+    public boolean isEveryDayTask;
 
 }
