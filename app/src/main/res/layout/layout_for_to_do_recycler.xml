@@ -23,6 +23,7 @@
                 android:id="@+id/complete_todo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
                 />
 
             <TextView
@@ -32,6 +33,13 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:text="测试" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="未完成"
+                android:id="@+id/InCompleteText_todo"/>
 
             <Button
                 android:layout_weight="1"

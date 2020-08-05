@@ -2,8 +2,7 @@ package com.hackweek.fightingchick;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
+
 import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
 import com.hackweek.fightingchick.database.GloryAndConfessionRecord;
 import com.hackweek.fightingchick.toolpackage.ThreadHelper;

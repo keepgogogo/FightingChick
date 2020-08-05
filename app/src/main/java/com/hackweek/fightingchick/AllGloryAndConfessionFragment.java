@@ -9,14 +9,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewTreeLifecycleOwner;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
+
 
 import android.os.Handler;
 import android.os.Message;
-import android.telephony.IccOpenLogicalChannelResponse;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,11 +31,11 @@ import com.hackweek.fightingchick.database.GloryAndConfessionRecord;
 import com.hackweek.fightingchick.recycler.GloryAndConfessionAdapter;
 import com.hackweek.fightingchick.recycler.GloryAndConfessionViewModel;
 import com.hackweek.fightingchick.toolpackage.GloryAndConfessionRecordsOperator;
-import com.yanzhenjie.recyclerview.SwipeRecyclerView;
+
 import com.yanzhenjie.recyclerview.widget.DefaultItemDecoration;
 
 import java.util.List;
-import java.util.Objects;
+
 
 public class AllGloryAndConfessionFragment extends Fragment implements View.OnClickListener{
 

@@ -5,7 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
+
 import android.icu.util.Calendar;
 import android.os.Bundle;
 
@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -32,11 +33,12 @@ import android.widget.Toast;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.hackweek.fightingchick.database.FocusList;
-import com.hackweek.fightingchick.database.FocusListDao;
+
 import com.hackweek.fightingchick.database.FocusListDataBase;
 import com.hackweek.fightingchick.reminder.ReminderActivity;
 import com.hackweek.fightingchick.toolpackage.ThreadHelper;
 import com.hackweek.fightingchick.utility.TodoNotificationService;
+
 
 import java.util.Date;
 import java.util.UUID;

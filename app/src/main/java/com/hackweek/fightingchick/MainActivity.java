@@ -4,11 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
-import androidx.room.Room;
-import androidx.room.migration.Migration;
+
+
+
+
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -18,22 +17,25 @@ import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.os.Bundle;
+
+
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.amitshekhar.DebugDB;
+
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import com.hackweek.fightingchick.database.FocusList;
 import com.hackweek.fightingchick.database.FocusListDataBase;
 import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
 
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+
+
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

@@ -2,7 +2,7 @@ package com.hackweek.fightingchick;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Message;
-//import android.security.identity.EphemeralPublicKeyNotFoundException;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,12 +102,7 @@ public class StatisticsFragment extends Fragment {
 
 
                     List<FocusList> lists=(List<FocusList>)message.obj;
-                    lists.get(0).FocusTime=15;
-                    lists.get(1).FocusTime=123;
-                    lists.get(2).FocusTime=180;
 
-                    lists.get(0).energyValue=5;
-                    lists.get(1).energyValue=23;
 
                     StringBuilder stringBuilder=new StringBuilder(textViewTodayCompletionRate.getText());
                     stringBuilder.append(getDayCompletionRate(lists));

@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
+
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -17,14 +17,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.hackweek.fightingchick.database.FocusListDataBase;
-import com.hackweek.fightingchick.database.GloryAndConfessionDataBase;
+
+
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

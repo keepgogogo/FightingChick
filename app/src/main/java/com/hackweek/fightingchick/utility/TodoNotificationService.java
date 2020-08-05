@@ -1,13 +1,14 @@
 package com.hackweek.fightingchick.utility;
 
 import android.app.IntentService;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
+
 import android.content.Intent;
+
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
@@ -19,8 +20,9 @@ import com.hackweek.fightingchick.MainActivity;
 import com.hackweek.fightingchick.R;
 import com.hackweek.fightingchick.database.FocusList;
 import com.hackweek.fightingchick.database.FocusListDataBase;
+
 import com.hackweek.fightingchick.reminder.ReminderActivity;
-import com.hackweek.fightingchick.toolpackage.ThreadHelper;
+
 
 import java.util.List;
 import java.util.UUID;
