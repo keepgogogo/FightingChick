@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
-import static androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC;
+
 
 public class SplashActivity extends AppCompatActivity implements View.OnClickListener{
 

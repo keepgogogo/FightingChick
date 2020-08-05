@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hackweek.fightingchick.R;
 import com.hackweek.fightingchick.database.GloryAndConfessionRecord;
 
-import java.text.BreakIterator;
+
 import java.util.List;
 
 public class GloryAndConfessionAdapter extends RecyclerView

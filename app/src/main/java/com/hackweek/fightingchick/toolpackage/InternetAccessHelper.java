@@ -1,8 +1,8 @@
 package com.hackweek.fightingchick.toolpackage;
 
 import android.Manifest;
-import android.app.Activity;
-import android.bluetooth.BluetoothGattDescriptor;
+
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Message;
@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.concurrent.BlockingDeque;
+
 
 import okhttp3.Call;
 import okhttp3.Callback;

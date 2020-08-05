@@ -2,7 +2,7 @@ package com.hackweek.fightingchick;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.Message;
-import android.security.identity.EphemeralPublicKeyNotFoundException;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

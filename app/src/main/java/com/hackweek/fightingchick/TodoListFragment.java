@@ -22,18 +22,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hackweek.fightingchick.database.FocusList;
 import com.hackweek.fightingchick.database.FocusListDao;
 import com.hackweek.fightingchick.database.FocusListDataBase;
-import com.hackweek.fightingchick.database.GloryAndConfessionDao;
-import com.hackweek.fightingchick.database.GloryAndConfessionRecord;
-import com.hackweek.fightingchick.recycler.GloryAndConfessionAdapter;
+
+
+
 import com.hackweek.fightingchick.recycler.ToDoListAdapter;
 import com.hackweek.fightingchick.recycler.ToDoListViewModel;
 import com.hackweek.fightingchick.toolpackage.ThreadHelper;
 
-import org.w3c.dom.Text;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,6 +45,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
 
     final int UPDATE_UI=1;
     final int DELETE_PLAN=2;
+    final int APPEND_EVERY_DAY=3;
 
     private static final String TAG = "TodoListFragment";
     private Button addTask ;
@@ -113,7 +115,18 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
                 //用户点击设为每日待办按钮后逻辑
                 else if(viewName == ToDoListAdapter.ViewNameInToDo.SET_AS_EVERYDAY_PLAN)
                 {
-
+                    FocusList record=adapter.getMData().get(position);
+                    if (record.isEveryDayTask)
+                    {
+                        record.isEveryDayTask=false;
+                        Toast.makeText(getContext(),"已取消每日待办",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        record.isEveryDayTask=true;
+                        Toast.makeText(getContext(),"已设为每日待办",Toast.LENGTH_SHORT).show();
+                    }
+                    threadHelper.updateFocusList(focusListDataBase,record);
                 }
                 //TODO
                 //用户点击开始记录专注时长按钮后逻辑
@@ -191,6 +204,9 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
                 String newDateString = fmt.format(currentCalendar.getTime());
 
                 List<FocusList> records=dao.getByDate(Integer.parseInt(newDateString));
+                List<FocusList> extraEveryDay=dao.getEveryDayTask(true);
+
+                records.addAll(extraEveryDay);
                 Message message=new Message();
                 message.what=UPDATE_UI;
                 message.obj=records;

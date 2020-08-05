@@ -1,9 +1,13 @@
 package com.hackweek.fightingchick.recycler;
 
+import java.util.Calendar;
+
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,9 +43,35 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
     public void onBindViewHolder(ToDoListViewHolder holder,int position)
     {
         holder.whatToDoTextView.setText(mData.get(position).whatTodo);
+
+        isPlanMissed(mData.get(position),holder.incompleteText,holder.checkBox);
+
         holder.startFocus.setTag(position);
         holder.setEveryDayPlan.setTag(position);
         holder.deleteButton.setTag(position);
+    }
+
+
+    public void isPlanMissed(FocusList plan,TextView textView,CheckBox checkBox)
+    {
+        if(plan.FocusTime!=0)
+        {
+            textView.setText("");
+            checkBox.setChecked(true);
+        }
+        else
+        {
+            Calendar calendar=Calendar.getInstance();
+            int hour=calendar.get(Calendar.HOUR_OF_DAY);
+            int minute=calendar.get(Calendar.MINUTE);
+            if (hour>plan.hour)textView.setText("未完成");
+            else if(hour==plan.hour)
+            {
+                if (minute>plan.minute)textView.setText("未完成");
+                else textView.setText("");
+            }
+            else textView.setText("");
+        }
     }
 
     @Override
@@ -49,15 +79,19 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
 
     public class ToDoListViewHolder extends RecyclerView.ViewHolder {
         public TextView whatToDoTextView;
+        public TextView incompleteText;
         public Button deleteButton;
         public Button setEveryDayPlan;
         public Button startFocus;
+        public CheckBox checkBox;
         public ToDoListViewHolder(@NonNull View itemView) {
             super(itemView);
             whatToDoTextView=itemView.findViewById(R.id.whatToDo_todo);
             deleteButton=itemView.findViewById(R.id.ButtonForDelete_todo);
             setEveryDayPlan=itemView.findViewById(R.id.ButtonForSetEveryDayPlan_todo);
             startFocus=itemView.findViewById(R.id.ButtonForStartFocus_todo);
+            checkBox=itemView.findViewById(R.id.complete_todo);
+            incompleteText=itemView.findViewById(R.id.InCompleteText_todo);
             startFocus.setOnClickListener(ToDoListAdapter.this);
             setEveryDayPlan.setOnClickListener(ToDoListAdapter.this);
             deleteButton.setOnClickListener(ToDoListAdapter.this);

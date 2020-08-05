@@ -21,12 +21,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ActivityChooserView;
+
 import androidx.fragment.app.Fragment;
 
 import java.io.File;
@@ -34,7 +34,7 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import top.zibin.luban.CompressionPredicate;
