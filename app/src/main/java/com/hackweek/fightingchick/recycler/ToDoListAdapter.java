@@ -3,6 +3,7 @@ package com.hackweek.fightingchick.recycler;
 import java.util.Calendar;
 
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,10 +65,18 @@ public class ToDoListAdapter extends RecyclerView.Adapter<ToDoListAdapter.ToDoLi
             Calendar calendar=Calendar.getInstance();
             int hour=calendar.get(Calendar.HOUR_OF_DAY);
             int minute=calendar.get(Calendar.MINUTE);
-            if (hour>plan.hour)textView.setText("未完成");
+            if (hour>plan.hour)
+            {
+                textView.setText("未完成");
+                textView.setTextColor(Color.RED);
+            }
             else if(hour==plan.hour)
             {
-                if (minute>plan.minute)textView.setText("未完成");
+                if (minute>plan.minute)
+                {
+                    textView.setText("未完成");
+                    textView.setTextColor(Color.RED);
+                }
                 else textView.setText("");
             }
             else textView.setText("");

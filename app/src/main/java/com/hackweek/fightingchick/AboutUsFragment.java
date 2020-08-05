@@ -1,5 +1,6 @@
 package com.hackweek.fightingchick;
 
+import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,12 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.hackweek.fightingchick.toolpackage.AssetsOperate;
 
 
 public class AboutUsFragment extends Fragment implements View.OnClickListener {
 
     private MainActivity mainActivity;
     private Button buttonForGetBack;
+    private TextView textView;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -23,6 +28,12 @@ public class AboutUsFragment extends Fragment implements View.OnClickListener {
         mainActivity=(MainActivity)getActivity();
         buttonForGetBack=view.findViewById(R.id.ButtonForGetBackInAboutUsFragment);
         buttonForGetBack.setOnClickListener(this);
+
+        textView=(TextView)view.findViewById(R.id.TextViewForAboutUsInAboutUsFragment);
+
+        AssetsOperate assetsOperate=new AssetsOperate();
+        AssetManager assetManager=mainActivity.getAssets();
+        textView.setText(assetsOperate.textFileGet("AboutUs.txt",assetManager));
     }
 
     @Override

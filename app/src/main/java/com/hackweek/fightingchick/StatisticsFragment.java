@@ -102,12 +102,7 @@ public class StatisticsFragment extends Fragment {
 
 
                     List<FocusList> lists=(List<FocusList>)message.obj;
-                    lists.get(0).FocusTime=15;
-                    lists.get(1).FocusTime=123;
-                    lists.get(2).FocusTime=180;
 
-                    lists.get(0).energyValue=5;
-                    lists.get(1).energyValue=23;
 
                     StringBuilder stringBuilder=new StringBuilder(textViewTodayCompletionRate.getText());
                     stringBuilder.append(getDayCompletionRate(lists));
