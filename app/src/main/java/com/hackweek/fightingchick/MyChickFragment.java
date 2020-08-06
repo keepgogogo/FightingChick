@@ -47,6 +47,7 @@ public class MyChickFragment extends Fragment {
         myChickProfile = view.findViewById(R.id.my_chick_profile);
         myChickName = view.findViewById(R.id.my_chick_name);
         upgradeProgressBar = view.findViewById(R.id.upgrade_progress_bar);
+        upgradeProgressBar.setScaleY(3f);
         energyValueView = view.findViewById(R.id.energy_value);
         myChickSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences bigSp = getActivity().getSharedPreferences(getString(R.string.bigSp_key),Context.MODE_PRIVATE);

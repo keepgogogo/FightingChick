@@ -29,7 +29,6 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
     private TextView gloriesConfessions;
     private FocusListDataBase focusListDataBase;
     private SharedPreferences reminderSp;
-
     private FocusList focusList;
 
     @Override
@@ -39,6 +38,7 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
         focusListDataBase = FocusListDataBase.getDatabase(ReminderActivity.this);
         focusList=(FocusList)getIntent().getSerializableExtra(getString(R.string.focusList_to_reminder));
         timeTo = findViewById(R.id.reminder_timeto);
+
         timeTo.setText("该"+focusList.whatTodo+"啦！");
         justDoIt = findViewById(R.id.reminder_just_do_it);
         justDoIt.setOnClickListener(this);
@@ -68,7 +68,7 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                 toShowKey = getString(R.string.glories_confessions_to_show_3_key);
                 break;
         }
-        gloriesConfessions.setText(reminderSp.getString(toShowKey,""));
+        gloriesConfessions.setText(reminderSp.getString(toShowKey,"摆脱拖延，一起动起来"));
     }
 
     private void updateFocusList(){
@@ -80,35 +80,36 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.reminder_just_do_it://来了就是干
+                Toast.makeText(this, "动力值+5", Toast.LENGTH_SHORT).show();
                 focusList.status=1;
+                focusList.energyValue+=5;
                 updateFocusList();
-                //跳转计时器
-                Intent intentChrono = new Intent(ReminderActivity.this, ChronometerActivity.class);
-                intentChrono.putExtra(getString(R.string.focusList_to_chronometer),focusList);
-                startActivity(intentChrono);
-                finish();
+                int originalEnergyKey = reminderSp.getInt(getString(R.string.energy_key),0);
+                reminderSp.edit().putInt(getString(R.string.energy_key),originalEnergyKey+2).apply();
+                //如果要计时，跳转计时器
+                if(focusList.FocusTime>=0){
+                    Intent intentChrono = new Intent(ReminderActivity.this, ChronometerActivity.class);
+                    intentChrono.putExtra(getString(R.string.focusList_to_chronometer),focusList);
+                    startActivity(intentChrono);
+                }else{
+                    startMain();
+                }
                 break;
-            case R.id.reminder_later://一会提醒
+            case R.id.reminder_later://一会提醒 TODO
                 reminderSp.edit().putBoolean(MainActivity.CHANGE_OCCURRED,true).apply();
                 focusList.timeRung+=1;
                 focusList.status=2;
                 updateFocusList();
-                Intent intentMain = new Intent(ReminderActivity.this,MainActivity.class);
-                intentMain.putExtra(getString(R.string.focusList_to_main),focusList);
-                startActivity(intentMain);
-                finish();
+                startMain();
                 break;
             case R.id.reminder_other_stuff:// 有事不完成，动力值-2
                 Toast.makeText(this, "动力值-2", Toast.LENGTH_SHORT).show();
                 focusList.status=3;
                 focusList.energyValue-=2;
                 updateFocusList();
-                int originalEnergyKey = reminderSp.getInt(getString(R.string.energy_key),0);
+                originalEnergyKey = reminderSp.getInt(getString(R.string.energy_key),0);
                 reminderSp.edit().putInt(getString(R.string.energy_key),originalEnergyKey-2).apply();
-                //跳转主界面
-                intentMain = new Intent(ReminderActivity.this, MainActivity.class);
-                startActivity(intentMain);
-                finish();
+                startMain();
                 break;
             case R.id.reminder_lazy://懒了，动力值-5
                 Toast.makeText(this, "动力值-5", Toast.LENGTH_SHORT).show();
@@ -117,12 +118,15 @@ public class ReminderActivity extends AppCompatActivity implements View.OnClickL
                 updateFocusList();
                 originalEnergyKey = reminderSp.getInt(getString(R.string.energy_key),0);
                 reminderSp.edit().putInt(getString(R.string.energy_key),originalEnergyKey-5).apply();
-                //跳转主页面
-                intentMain = new Intent(ReminderActivity.this, MainActivity.class);
-                startActivity(intentMain);
-                finish();
+                startMain();
                 break;
         }
+    }
+
+    private void startMain(){
+        Intent intentMain = new Intent(ReminderActivity.this,MainActivity.class);
+        startActivity(intentMain);
+        finish();
     }
 
 }

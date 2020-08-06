@@ -17,20 +17,23 @@
             android:id="@+id/top_nickname_todo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="昵称"/>
         <TextView
             android:id="@+id/top_resolutions_todo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="4dp"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginHorizontal="@dimen/small_padding"
             app:layout_constraintLeft_toRightOf="@id/top_nickname_todo"
             app:layout_constraintRight_toLeftOf="@id/add_task"
             android:singleLine="false"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:text="永动宣言" />
         <Button
             android:id="@+id/add_task"

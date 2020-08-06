@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="@dimen/big_padding"
     tools:context=".reminder.ReminderActivity">
 
@@ -12,47 +12,115 @@
         android:id="@+id/reminder_timeto"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:layout_gravity="start"/>
+        android:layout_gravity="start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-    <TextView
-        android:layout_marginTop="@dimen/big_padding"
-        android:id="@+id/reminder_just_do_it"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:text="啥都不用说，来了就是干"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/reminder_later"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="7dp"
+            android:src="@mipmap/icon_round_panorama_fish_eye_black_36" />
+
+        <TextView
+            android:id="@+id/reminder_just_do_it"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="啥都不用说，来了就是干"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:text="再给我十分钟考虑考虑"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
-    <TextView
-        android:id="@+id/reminder_other_stuff"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="7dp"
+            android:src="@mipmap/icon_round_panorama_fish_eye_black_36" />
+
+        <TextView
+            android:id="@+id/reminder_later"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="再给我十分钟考虑考虑"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:text="今天突然有了其它事情，任务完成不了"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
-    <TextView
-        android:id="@+id/reminder_lazy"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="7dp"
+            android:src="@mipmap/icon_round_panorama_fish_eye_black_36" />
+
+        <TextView
+            android:id="@+id/reminder_other_stuff"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="今天突然有了其它事情，任务完成不了"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:text="有点犯懒，不想动"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
-    
-    <TextView
-        android:id="@+id/reminder_glories_confessions"
-        android:layout_marginTop="@dimen/big_padding"
-        android:layout_width="200dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="7dp"
+            android:src="@mipmap/icon_round_panorama_fish_eye_black_36" />
+
+        <TextView
+            android:id="@+id/reminder_lazy"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="有点犯懒，不想动"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+        android:padding="@dimen/small_padding"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/linear"
+        android:layout_marginTop="@dimen/big_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:text="温馨提示"/>
+
+        <TextView
+            android:id="@+id/reminder_glories_confessions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/small_padding"
+            android:text="摆脱拖延，一起动起来"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+    </LinearLayout>
+
 
 
 

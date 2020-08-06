@@ -54,6 +54,7 @@ public class FocusList implements Serializable {
     @ColumnInfo
     public int minute;
     //length of focus time should be saved by minutes
+    //-1表示不记录时长
     @ColumnInfo(name = "FocusTime")
     public int FocusTime;
 

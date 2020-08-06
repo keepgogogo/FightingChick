@@ -8,6 +8,7 @@
         android:id="@+id/top_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:text="昵称"/>
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/small_padding"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:text="永动宣言"/>
 
 

@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener, R
     private MaterialRadioButton radioKuaiLeJi;
     private RadioGroup chooseInterval;
     private MaterialRadioButton radioIntervalCustom;
+    private Switch switchRecordTime;
     private EditText editNewTaskInterval;
     private TextView editInervalText;
     private Button saveNewTask;
@@ -92,6 +94,7 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener, R
         checkBoxVibrate = (CheckBox) view.findViewById(R.id.checkbox_vibrate);
         checkBoxRing = (CheckBox) view.findViewById(R.id.checkbox_ring);
         checkBoxRing.setOnClickListener(this);
+        switchRecordTime=(Switch)view.findViewById(R.id.switch_record_time);
         // choose ring
         chooseRing = (RadioGroup) view.findViewById(R.id.choose_ring);
         chooseRing2 = (RadioGroup) view.findViewById(R.id.choose_ring_2);
@@ -281,10 +284,13 @@ public class AddTaskFragment extends Fragment implements View.OnClickListener, R
                     newInterval = getInterval();
                 newDayOfWeek = currentCalendar.get(Calendar.DAY_OF_WEEK);
                 newDate = mainActivity.getNewDate();
+                int focusTime=0;
+                if(!switchRecordTime.isChecked())
+                    focusTime=-1;
 
                 // save using Room
                 FocusList newFocusList = new FocusList(newDate,
-                        newHour, newMinute, 0, newWhatTodo,
+                        newHour, newMinute, focusTime, newWhatTodo,
                         noticeMethod, newRing, newInterval, newDayOfWeek, 0,
                         currentCalendar.get(Calendar.YEAR),
                         currentCalendar.get(Calendar.MONTH)+1,//系统的month少1
