@@ -2,6 +2,8 @@ package com.hackweek.fightingchick;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +22,15 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.hackweek.fightingchick.MineFragment.HEAD_PORTRAIT;
 
 
 public class RecordsFragment extends Fragment {
@@ -31,6 +40,9 @@ public class RecordsFragment extends Fragment {
     private TextView top_records_nickname;
     private TextView top_records_date;
     private TextView top_records_resolutions;
+    private CircleImageView topProfile;
+    private MainActivity mainActivity;
+    private static final String TAG = "RecordsFragment";
     private final String[] tabLabels = {"我的小鸡","活动统计","忏悔录&光荣录"};
 
     public RecordsFragment() {
@@ -71,6 +83,29 @@ public class RecordsFragment extends Fragment {
         Date today = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("MM'月'dd'日'");
         top_records_date.setText(ft.format(today));
+
+        topProfile=(CircleImageView)view.findViewById(R.id.top_profile);
+        mainActivity=(MainActivity)getActivity();
+        if(isPortraitExisted()) {
+            try {
+                setViewHeadPortrait();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //从MineFragment抄过来的
+    public void setViewHeadPortrait() throws FileNotFoundException {
+        FileInputStream inputStream=mainActivity.openFileInput(HEAD_PORTRAIT);
+        Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
+        topProfile.setImageBitmap(bitmap);
+    }
+    public boolean isPortraitExisted()
+    {
+        File file=new File(mainActivity.getFilesDir()+"/"+HEAD_PORTRAIT);
+        Log.d(TAG, "isPortraitExisted: portrait loaded  "+file.length());
+        return file.exists();
     }
 }
 

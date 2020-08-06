@@ -1,40 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/huge_padding"
     android:paddingVertical="@dimen/big_padding"
     tools:context=".MyChickFragment">
 
-    <ImageView
-        android:id="@+id/my_chick_profile"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
-        android:scaleType="centerInside"
-        android:src="@drawable/logo" />
+        android:layout_weight="6">
 
-    <TextView
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        android:id="@+id/my_chick_name"
-        android:layout_marginTop="@dimen/big_padding"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:text="白切鸡" />
+        <HorizontalScrollView
+            android:id="@+id/my_chick_profiles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/small_padding"
+            android:clickable="false"
+            android:fadingEdgeLength="150dp"
+            android:overScrollMode="always"
+            android:requiresFadingEdge="horizontal"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/my_chick_profile_tuolaji"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/tuolaji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="拖拉鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+                <LinearLayout android:id="@+id/my_chick_profile_luotangji"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="200dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/luotangji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="落汤鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:id="@+id/my_chick_profile_baiqieji"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="200dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/baiqieji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="白切鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="230dp"
+                    android:id="@+id/my_chick_profile_paobuji"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="230dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/paobuji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="跑步鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_chick_profile_huaxiangji"
+                    android:layout_width="230dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="230dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/huaxiangji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="滑翔鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_chick_profile_zhandouji"
+                    android:layout_width="230dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="230dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/zhandouji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="战斗鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/my_chick_profile_yongdongji"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="200dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="5"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/yongdongji" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/big_padding"
+                        android:layout_weight="1"
+                        android:text="永动鸡"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/baseline_arrow_back_black_48"
+            android:background="@android:color/transparent"
+            android:alpha="0.4"
+            android:layout_marginLeft="@dimen/small_padding"
+            android:layout_marginTop="180dp"
+            android:layout_gravity="left"
+            android:id="@+id/my_chick_last_chick"/>
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/baseline_arrow_forward_black_48"
+            android:background="@android:color/transparent"
+            android:alpha="0.4"
+            android:layout_marginLeft="@dimen/small_padding"
+            android:layout_marginTop="180dp"
+            android:layout_gravity="right"
+            android:id="@+id/my_chick_next_chick"/>
+
+
+
+
+    </FrameLayout>
+
+
+
+
     <com.beardedhen.androidbootstrap.BootstrapProgressBar
         android:id="@+id/upgrade_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:animated="true"
         app:bootstrapBrand="warning"
+        android:layout_marginHorizontal="@dimen/big_padding"
         app:progress="0"
-        app:striped="true"
-        />
+        app:roundedCorners="true"
+        app:striped="true" />
     <!--
 
     <ProgressBar
@@ -50,11 +263,12 @@
 
     <TextView
         android:id="@+id/energy_value"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/small_padding"
         android:layout_weight="1"
-        android:text="动力值:0" />
+        android:text="动力值:0"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
 
 </LinearLayout>

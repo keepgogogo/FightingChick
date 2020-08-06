@@ -13,12 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/top_profile_todo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/default_profile"/>
+
+
         <TextView
             android:id="@+id/top_nickname_todo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/top_profile_todo"
             app:layout_constraintTop_toTopOf="parent"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="昵称"/>
@@ -73,14 +83,17 @@
             <ImageView
                 android:id="@+id/todo_bg"
                 android:layout_width="250dp"
+                android:alpha="0.5"
                 android:layout_height="250dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/recycler_bg"/>
             <TextView
+                android:alpha="0.3"
                 android:id="@+id/todo_completed"
                 android:layout_marginTop="@dimen/small_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:text="任务都完成啦！"/>
 
         </LinearLayout>

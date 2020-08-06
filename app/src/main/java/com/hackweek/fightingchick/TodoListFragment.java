@@ -3,6 +3,8 @@ package com.hackweek.fightingchick;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.icu.util.Calendar;
 import android.media.Image;
 import android.os.Bundle;
@@ -37,10 +39,16 @@ import com.hackweek.fightingchick.recycler.ToDoListViewModel;
 import com.hackweek.fightingchick.toolpackage.ThreadHelper;
 
 
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.hackweek.fightingchick.MineFragment.HEAD_PORTRAIT;
 
 
 public class TodoListFragment extends Fragment implements View.OnClickListener{
@@ -68,6 +76,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
     private FocusListDao focusListDao;
     private ImageView background;
     private TextView completedTextView;
+    private CircleImageView topProfile;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -82,6 +91,15 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
         addTask = (Button)view.findViewById(R.id.add_task);
         dateTextView = (TextView)view.findViewById(R.id.top_date_todo);
         nickNameTextView = (TextView)view.findViewById(R.id.top_nickname_todo);
+        topProfile=(CircleImageView)view.findViewById(R.id.top_profile_todo);
+
+        if(isPortraitExisted()) {
+            try {
+                setViewHeadPortrait();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
 
         recyclerView=(RecyclerView)view.findViewById(R.id.RecyclerInToDoFragment);
         layoutManager=new LinearLayoutManager(getContext());
@@ -252,5 +270,23 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_todo_list, container, false);
     }
+
+
+
+
+    //从MineFragment抄过来的
+    public void setViewHeadPortrait() throws FileNotFoundException {
+        FileInputStream inputStream=mainActivity.openFileInput(HEAD_PORTRAIT);
+        Bitmap bitmap= BitmapFactory.decodeStream(inputStream);
+        topProfile.setImageBitmap(bitmap);
+    }
+    public boolean isPortraitExisted()
+    {
+        File file=new File(mainActivity.getFilesDir()+"/"+HEAD_PORTRAIT);
+        Log.d(TAG, "isPortraitExisted: portrait loaded  "+file.length());
+        return file.exists();
+    }
+
+
 
 }

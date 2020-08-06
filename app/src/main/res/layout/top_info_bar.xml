@@ -4,8 +4,16 @@
     android:padding="@dimen/small_padding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/top_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/default_profile"/>
+
     <TextView
         android:id="@+id/top_nickname"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
