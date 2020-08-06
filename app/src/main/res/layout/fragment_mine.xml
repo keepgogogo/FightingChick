@@ -30,6 +30,8 @@
             android:id="@+id/NickName"
             />
 
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,17 +42,45 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             />
 
-        <Button
-            android:id="@+id/ButtonForChangePersonalDocument"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/cardview_shadow_end_color"
-            android:textColor="@color/colorGrey"
-            android:layout_marginTop="1dp"
-            android:layout_marginHorizontal="@dimen/small_padding"
-            android:text="编辑个人资料"
-            android:textSize="16sp"/>
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/edit_personal_document"/>
+
+                <Button
+                    android:id="@+id/ButtonForChangePersonalDocument"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/cardview_shadow_end_color"
+                    android:textColor="#000"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginHorizontal="@dimen/small_padding"
+                    android:text="编辑个人资料"
+                    android:textSize="16sp"/>
+
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
 
         <Button
             android:layout_width="wrap_content"
@@ -64,12 +94,14 @@
             android:id="@+id/ButtonForWatchGloryAndConfessionInMineFragment"
             />
 
+
+
         <Button
             android:id="@+id/ButtonForWatchAboutUsInMineFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="43dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             android:textColor="#000"
             android:text="关于我们"

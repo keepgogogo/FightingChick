@@ -128,6 +128,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
                         Toast.makeText(getContext(),"已设为每日待办",Toast.LENGTH_SHORT).show();
                     }
                     threadHelper.updateFocusList(focusListDataBase,record);
+
                 }
                 //TODO
                 //用户点击开始记录专注时长按钮后逻辑

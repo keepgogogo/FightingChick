@@ -150,20 +150,7 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
 
                                 @Override
                                 public void onSuccess(File file) {
-//                                    Bitmap bitmap=BitmapFactory.decodeFile(file);
                                     Log.d(TAG, "onStart: luban success handled file "+file.length());
-//                                    file.renameTo(new File(mainActivity.getFilesDir()
-//                                            +"/"+MineFragment.HEAD_PORTRAIT));
-
-//                                    if(file.exists())
-//                                    {
-//                                        try {
-//                                            file.delete();
-//                                            file.createNewFile();
-//                                        } catch (Exception e) {
-//                                            e.printStackTrace();
-//                                        }
-//                                    }
                                     try {
                                         byte[] bytes=new byte[(int)(file.length())];
                                         FileInputStream inputStream=new FileInputStream(file);
@@ -172,7 +159,7 @@ public class EditPersonalDocumentFragment extends Fragment implements View.OnCli
                                         FileOutputStream outputStream=
                                                 new FileOutputStream(new File(mainActivity.getFilesDir()
                                                 +"/"+MineFragment.HEAD_PORTRAIT));
-//                                        bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream);
+
                                         outputStream.write(bytes);
                                         outputStream.flush();
                                         outputStream.close();
