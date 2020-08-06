@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,6 +66,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
     private ThreadHelper threadHelper;
     private FocusListDataBase focusListDataBase;
     private FocusListDao focusListDao;
+    private ImageView background;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -73,7 +76,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
         handler=new ToDoListFragmentHandler();
         threadHelper=new ThreadHelper();
 
-
+        background=(ImageView)view.findViewById(R.id.todo_bg);
         addTask = (Button)view.findViewById(R.id.add_task);
         dateTextView = (TextView)view.findViewById(R.id.top_date_todo);
         nickNameTextView = (TextView)view.findViewById(R.id.top_nickname_todo);
@@ -91,6 +94,10 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
             public void onChanged(List<FocusList> records) {
                 adapter.setMData(records);
                 recyclerView.setAdapter(adapter);
+                if(records.size()>0)
+                    background.setVisibility(View.INVISIBLE);
+                else
+                    background.setVisibility(View.VISIBLE);
             }
         };
 

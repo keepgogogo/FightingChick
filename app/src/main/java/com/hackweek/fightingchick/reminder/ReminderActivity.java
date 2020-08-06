@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.card.MaterialCardView;
 import com.hackweek.fightingchick.ChronometerActivity;
 import com.hackweek.fightingchick.MainActivity;
 import com.hackweek.fightingchick.R;

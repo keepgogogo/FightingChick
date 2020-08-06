@@ -62,10 +62,22 @@
             android:layout_marginLeft="@dimen/small_padding"/>
     </LinearLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/RecyclerInToDoFragment"/>
+        android:layout_height="match_parent">
+        
+        <ImageView
+            android:id="@+id/todo_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/recycler_bg"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RecyclerInToDoFragment"/>
+    </FrameLayout>
+    
 
 </LinearLayout>
