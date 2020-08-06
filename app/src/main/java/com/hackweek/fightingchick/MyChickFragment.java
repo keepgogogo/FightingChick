@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapProgressBar;
 
 
 public class MyChickFragment extends Fragment {
@@ -22,7 +23,7 @@ public class MyChickFragment extends Fragment {
     private int energyValue;
     private TextView myChickName;
     private ImageView myChickProfile;
-    private ProgressBar upgradeProgressBar;
+    private BootstrapProgressBar upgradeProgressBar;
     private TextView energyValueView;
 
     private SharedPreferences myChickSp;
@@ -44,11 +45,11 @@ public class MyChickFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        myChickProfile = view.findViewById(R.id.my_chick_profile);
-        myChickName = view.findViewById(R.id.my_chick_name);
-        upgradeProgressBar = view.findViewById(R.id.upgrade_progress_bar);
-        upgradeProgressBar.setScaleY(3f);
-        energyValueView = view.findViewById(R.id.energy_value);
+        myChickProfile = (ImageView)view.findViewById(R.id.my_chick_profile);
+        myChickName = (TextView)view.findViewById(R.id.my_chick_name);
+        upgradeProgressBar = (BootstrapProgressBar)view.findViewById(R.id.upgrade_progress_bar);
+        //upgradeProgressBar.setScaleY(3f);
+        energyValueView = (TextView)view.findViewById(R.id.energy_value);
         myChickSp = this.getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences bigSp = getActivity().getSharedPreferences(getString(R.string.bigSp_key),Context.MODE_PRIVATE);
         energyValue = bigSp.getInt(getString(R.string.energy_key),0);

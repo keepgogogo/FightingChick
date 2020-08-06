@@ -67,6 +67,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
     private FocusListDataBase focusListDataBase;
     private FocusListDao focusListDao;
     private ImageView background;
+    private TextView completedTextView;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -77,6 +78,7 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
         threadHelper=new ThreadHelper();
 
         background=(ImageView)view.findViewById(R.id.todo_bg);
+        completedTextView=(TextView)view.findViewById(R.id.todo_completed);
         addTask = (Button)view.findViewById(R.id.add_task);
         dateTextView = (TextView)view.findViewById(R.id.top_date_todo);
         nickNameTextView = (TextView)view.findViewById(R.id.top_nickname_todo);
@@ -94,10 +96,15 @@ public class TodoListFragment extends Fragment implements View.OnClickListener{
             public void onChanged(List<FocusList> records) {
                 adapter.setMData(records);
                 recyclerView.setAdapter(adapter);
-                if(records.size()>0)
+                if(records.size()>0){
                     background.setVisibility(View.INVISIBLE);
-                else
+                    completedTextView.setVisibility(View.INVISIBLE);
+                }
+                else{
                     background.setVisibility(View.VISIBLE);
+                    completedTextView.setVisibility(View.VISIBLE);
+                }
+
             }
         };
 

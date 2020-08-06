@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/huge_padding"
@@ -25,6 +26,16 @@
         android:layout_height="0dp"
         android:layout_weight="1.5"
         android:text="白切鸡" />
+    <com.beardedhen.androidbootstrap.BootstrapProgressBar
+        android:id="@+id/upgrade_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:animated="true"
+        app:bootstrapBrand="warning"
+        app:progress="0"
+        app:striped="true"
+        />
+    <!--
 
     <ProgressBar
         android:id="@+id/upgrade_progress_bar"
@@ -35,6 +46,7 @@
         android:layout_weight="1"
         android:max="100"
         android:progress="0" />
+        -->
 
     <TextView
         android:id="@+id/energy_value"

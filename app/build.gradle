@@ -91,4 +91,6 @@ dependencies {
 
     //图表
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //BootStrap 使用ProgressBar
+    implementation 'com.beardedhen:androidbootstrap:2.3.2'
 }
